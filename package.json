@@ -1,0 +1,23 @@
+{
+  "name": "@studiohyperdrive/nodejs-boilerplate",
+  "version": "0.0.0",
+  "description": "Node.js boilerplate by Studio Hyperdrive for REST API's.",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/studiohyperdrive/nodejs-boilerplate.git"
+  },
+  "contributors": [
+    "Thomas Bormans <thomas.bormans@studiohyperdrive.be>",
+    "Niels Bril <niels.bril@studiohyperdrive.be>",
+    "Denis Valcke <denis.valcke@studiohyperdrive.be>"
+  ],
+  "homepage": "https://github.com/studiohyperdrive/nodejs-boilerplate",
+  "dependencies": {},
+  "devDependencies": {
+    "@commitlint/cli": "8.0.0",
+    "@commitlint/config-conventional": "8.0.0",
+    "husky": "2.4.1"
+  }
+}
