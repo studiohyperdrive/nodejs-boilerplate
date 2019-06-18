@@ -16,3 +16,9 @@ node_modules
 ###############################
 ### PROJECT RELATED IGNORES ###
 ###############################
+
+### Dist ###
+server/dist
+
+### Jest ###
+server/test/coverage

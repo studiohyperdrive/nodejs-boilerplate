@@ -1,6 +1,6 @@
 FROM node:dubnium-alpine
 
-# Expose port
+# Expose ports
 EXPOSE 3000 5858
 
 # Install latest npm version
@@ -9,9 +9,10 @@ RUN npm i --global --silent npm@latest
 # Install dependencies
 WORKDIR /app
 COPY package.json package-lock.json .npmrc ./
-RUN npm i --no-optional --silent && npm cache clean --force
+RUN npm i --no-optional --silent
 ENV PATH /app/node_modules/.bin:$PATH
 
+# Set working directory for source code
 WORKDIR /app/server
 
 # Start application with live reload
