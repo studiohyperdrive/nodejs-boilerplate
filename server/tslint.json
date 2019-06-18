@@ -2,6 +2,9 @@
 	"extends": "tslint-config-airbnb",
 	"rules": {
 		"indent": [false, "tabs"],
+		"max-line-length": [true, 160],
+		"no-any": [true],
+		"no-console": [true],
 		"ter-indent": [false, "tab"]
-	},
+	}
 }
