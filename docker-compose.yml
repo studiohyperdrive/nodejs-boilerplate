@@ -1,0 +1,29 @@
+version: '2.4'
+
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.dev
+    image: nodejs-boilerplate-server
+    container_name: nodejs-boilerplate-server
+    env_file: ./server/.env/local.env
+    init: true
+    ports:
+      # App port
+      - 3000:3000
+      # Debug port
+      - 5858:5858
+    networks:
+      - nodejs-boilerplate
+    volumes:
+      # Delegated option for faster mounted volumes
+      - ./server:/app/server:delegated
+      # Because `npm install`
+      - ./server/package.json:/app/package.json
+      - ./server/package-lock.json:/app/package-lock.json
+      # Block local modules
+      - /app/server/node_modules
+
+networks:
+  nodejs-boilerplate:
