@@ -2,15 +2,15 @@
 FROM node:dubnium-alpine as base
 
 # Install latest npm version
-RUN npm install --global --silent npm@latest
+RUN npm i --global --silent npm@latest
 
 ### BUILDER STAGE ###
 FROM base as builder
 
 # Install dependencies
 WORKDIR /app
-COPY package.json package-lock.json .npmrc ./
-RUN  npm ci --no-optional --silent
+COPY package*.json .npmrc ./
+RUN npm ci --silent
 ENV PATH /app/node_modules/.bin:$PATH
 
 # Copy source code
@@ -28,12 +28,12 @@ EXPOSE 80
 
 # Install dependencies (production only)
 WORKDIR /app
-COPY package.json package-lock.json .npmrc ./
-RUN  npm ci --production --no-optional --silent && npm cache clean --force
+COPY package*.json .npmrc ./
+RUN npm ci --production --silent && npm cache clean --force
 ENV PATH /app/node_modules/.bin:$PATH
 
 # Copy built source code
-COPY --from=builder /app/server/.env /app/.env
-COPY --from=builder /app/server/dist /app
+WORKDIR /app/server
+COPY --from=builder /app/server/dist ./
 
 CMD node src/app.js
