@@ -5,21 +5,22 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run serve",
-    "serve": "ts-node-dev --poll --inspect=0.0.0.0:5858 -- src/app.ts",
+    "serve": "ts-node-dev -r tsconfig-paths/register --poll --inspect=0.0.0.0:5858 -- src/app.ts",
     "prebuild": "npm run clean:build",
     "build": "tsc -p tsconfig.build.json",
     "lint": "tslint -c tslint.json -p tsconfig.json -t stylish",
     "lint:fix": "npm run lint -- --fix",
     "pretest": "npm run clean:coverage",
-    "test": "jest --config jest.config.json",
-    "test:watch": "jest --config jest.config.json --watchAll",
+    "test": "jest --config jest.config.js",
+    "test:watch": "npm run test -- --watchAll",
     "posttest": "npm run lint",
     "clean:build": "rm -rf ./dist",
     "clean:coverage": "rm -rf ./test/coverage",
     "open:coverage": "open ./test/coverage/lcov-report/index.html"
   },
   "dependencies": {
-    "express": "4.17.1"
+    "express": "4.17.1",
+    "tsconfig-paths": "3.8.0"
   },
   "devDependencies": {
     "@types/dotenv": "6.1.1",

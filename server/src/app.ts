@@ -2,7 +2,7 @@ import { default as express, Application, Request, Response, NextFunction } from
 import { Server } from 'http';
 import { AddressInfo } from 'net';
 
-import { version } from '../package.json';
+import { version } from '@pkg';
 
 const app: Application = express();
 let server: Server;
