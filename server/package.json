@@ -6,13 +6,15 @@
   "scripts": {
     "start": "npm run serve",
     "serve": "ts-node-dev --poll --inspect=0.0.0.0:5858 -- src/app.ts",
-    "build": "tsc -p tsconfig.json",
+    "prebuild": "npm run clean:build",
+    "build": "tsc -p tsconfig.build.json",
     "lint": "tslint -c tslint.json -p tsconfig.json -t stylish",
     "lint:fix": "npm run lint -- --fix",
     "pretest": "npm run clean:coverage",
     "test": "jest --config jest.config.json",
     "test:watch": "jest --config jest.config.json --watchAll",
     "posttest": "npm run lint",
+    "clean:build": "rm -rf ./dist",
     "clean:coverage": "rm -rf ./test/coverage",
     "open:coverage": "open ./test/coverage/lcov-report/index.html"
   },
