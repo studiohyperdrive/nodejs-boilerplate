@@ -1,0 +1,19 @@
+FROM node:dubnium-alpine
+
+# Expose ports
+EXPOSE 3000 5858
+
+# Install latest npm version
+RUN npm i --global --silent npm@latest
+
+# Install dependencies
+WORKDIR /app
+COPY package*.json .npmrc ./
+RUN npm i --silent
+ENV PATH /app/node_modules/.bin:$PATH
+
+# Set working directory for source code
+WORKDIR /app/server
+
+# Start application with live reload
+CMD ts-node-dev -r tsconfig-paths/register --poll --inspect=0.0.0.0:5858 -- src/app.ts
