@@ -20,7 +20,17 @@
 		"lib": [
 			"dom",
 			"es2015"
-		]
+		],
+		"paths": {
+			"@app": ["src/app"],
+			"@config": ["src/config"],
+			"@config/*": ["src/config/*"],
+			"@core": ["src/core"],
+			"@core/*": ["src/core/*"],
+			"@pkg": ["package.json"],
+			"@shared": ["src/shared"],
+			"@shared/*": ["src/shared/*"]
+		}
 	},
 	"include": [
 		"src/**/*.ts"
