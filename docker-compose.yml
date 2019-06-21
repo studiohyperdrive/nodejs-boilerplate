@@ -1,6 +1,7 @@
 version: '2.4'
 
-x-default-logging: &default-logging
+x-default-options: &default-options
+  tty: true
   logging:
     options:
       max-size: '10m'
@@ -30,7 +31,7 @@ services:
       - ./server/package-lock.json:/app/package-lock.json
       # Block local modules
       - /app/server/node_modules
-    <<: *default-logging
+    <<: *default-options
 
 networks:
   nodejs-boilerplate:
