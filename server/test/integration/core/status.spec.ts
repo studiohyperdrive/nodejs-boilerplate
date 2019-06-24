@@ -1,11 +1,11 @@
 import { default as supertest } from 'supertest';
 
-import { default as app } from '@app';
+import { App } from '@app';
 import { version } from '@pkg';
 
-const api = supertest(app);
+const api = supertest(new App(false).app);
 
-describe('[INTEGRATION] Status route', () => {
+describe('[INTEGRATION - CORE] Status route', () => {
 	it('Should return the server status', (done) => {
 		api.get('/status')
 			.expect(200)
