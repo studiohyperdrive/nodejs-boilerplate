@@ -63,10 +63,10 @@ describe('[INTEGRATION - SAMPLE] Samples route', () => {
 	describe('Create sample', () => {
 		it('Should return a created sample', (done) => {
 			api.post('/v1/samples')
-				.expect(201)
 				.send({
 					id: 2,
 				})
+				.expect(201)
 				.then((res: supertest.Response) => {
 					expect(res.body).toBeObject();
 					expect(res.body).toContainAllKeys([
