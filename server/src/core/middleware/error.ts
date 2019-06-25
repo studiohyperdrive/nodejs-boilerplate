@@ -9,6 +9,11 @@ export class ErrorMiddleware {
 			return next();
 		}
 
+		// Prevent sending multiple responses
+		if (res.headersSent) {
+			return next();
+		}
+
 		// Convert a string to an Error object
 		if (typeof err === 'string') {
 			err = new Error(err); // tslint:disable-line no-parameter-reassignment
@@ -35,11 +40,6 @@ export class ErrorMiddleware {
 		// Convert an Error object to a CustomError object
 		if (err instanceof Error) {
 			err = new CustomError(err); // tslint:disable-line no-parameter-reassignment
-		}
-
-		// Prevent sending multiple responses
-		if (res.headersSent) {
-			return next();
 		}
 
 		return res.status((err as CustomError).status).json({

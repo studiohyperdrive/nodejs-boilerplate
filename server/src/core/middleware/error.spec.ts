@@ -1,13 +1,40 @@
 import { mockReq, mockRes } from 'sinon-express-mock';
 
+import { CustomError, BodyError, HeadersError, ParamsError, QueryError } from '@shared/helpers/error';
 import { default as config } from '@config';
+import { Request, Response, CustomErrorDetail } from '@shared/shared.types';
+import { ValidationError } from '@shared/helpers/validation/error';
 
-import { CustomError, BodyError, HeadersError, ParamsError } from '../../shared/helpers/error';
 import { ErrorMiddleware } from './error';
-import { Request, Response, QueryError } from '../../shared/shared.types';
-import { ValidationError } from '../../shared/helpers/validation/error';
 
-describe.only('[UNIT - CORE] ErrorMiddleware', () => {
+const validateBody = (body: any, status: number, name: string, message: string, details?: CustomErrorDetail[]): void => { // tslint:disable-line no-any
+	expect(body).toBeObject();
+	expect(body).toContainAllKeys([
+		'host',
+		'identifier',
+		'timestamp',
+		'status',
+		'name',
+		'message',
+		'details',
+		'stack',
+	]);
+	expect(body.host).toEqual(config.server.host);
+	expect(body.identifier).toBeString();
+	expect(body.timestamp).toBeString();
+	expect(body.status).toEqual(status);
+	expect(body.name).toEqual(name);
+	expect(body.message).toEqual(message);
+	expect(body.stack).toBeArray();
+
+	if (details) {
+		expect(body.details).toEqual(details);
+	} else {
+		expect(body.details).toBeUndefined();
+	}
+};
+
+describe('[UNIT - CORE] ErrorMiddleware', () => {
 	const validation: any = { // tslint:disable-line no-any
 		details: [{
 			message: 'message',
@@ -46,25 +73,7 @@ describe.only('[UNIT - CORE] ErrorMiddleware', () => {
 
 				return {
 					json: (body: CustomError) => {
-						expect(body).toBeObject();
-						expect(body).toContainAllKeys([
-							'host',
-							'identifier',
-							'timestamp',
-							'status',
-							'name',
-							'message',
-							'details',
-							'stack',
-						]);
-						expect(body.host).toEqual(config.server.host);
-						expect(body.identifier).toBeString();
-						expect(body.timestamp).toBeString();
-						expect(body.status).toEqual(500);
-						expect(body.name).toEqual('Error');
-						expect(body.message).toEqual('error');
-						expect(body.details).toBeUndefined();
-						expect(body.stack).toBeArray();
+						validateBody(body, 500, 'Error', 'error');
 						done();
 					},
 				};
@@ -86,25 +95,7 @@ describe.only('[UNIT - CORE] ErrorMiddleware', () => {
 
 				return {
 					json: (body: CustomError) => {
-						expect(body).toBeObject();
-						expect(body).toContainAllKeys([
-							'host',
-							'identifier',
-							'timestamp',
-							'status',
-							'name',
-							'message',
-							'details',
-							'stack',
-						]);
-						expect(body.host).toEqual(config.server.host);
-						expect(body.identifier).toBeString();
-						expect(body.timestamp).toBeString();
-						expect(body.status).toEqual(500);
-						expect(body.name).toEqual('Error');
-						expect(body.message).toEqual('error');
-						expect(body.details).toBeUndefined();
-						expect(body.stack).toBeArray();
+						validateBody(body, 500, 'Error', 'error');
 						done();
 					},
 				};
@@ -126,27 +117,9 @@ describe.only('[UNIT - CORE] ErrorMiddleware', () => {
 
 				return {
 					json: (body: BodyError) => {
-						expect(body).toBeObject();
-						expect(body).toContainAllKeys([
-							'host',
-							'identifier',
-							'timestamp',
-							'status',
-							'name',
-							'message',
-							'details',
-							'stack',
-						]);
-						expect(body.host).toEqual(config.server.host);
-						expect(body.identifier).toBeString();
-						expect(body.timestamp).toBeString();
-						expect(body.status).toEqual(400);
-						expect(body.name).toEqual('Bad Request');
-						expect(body.message).toEqual('Invalid body');
-						expect(body.details).toEqual([{
+						validateBody(body, 400, 'Bad Request', 'Invalid body', [{
 							err: 'message',
 						}]);
-						expect(body.stack).toBeArray();
 						done();
 					},
 				};
@@ -168,27 +141,9 @@ describe.only('[UNIT - CORE] ErrorMiddleware', () => {
 
 				return {
 					json: (body: HeadersError) => {
-						expect(body).toBeObject();
-						expect(body).toContainAllKeys([
-							'host',
-							'identifier',
-							'timestamp',
-							'status',
-							'name',
-							'message',
-							'details',
-							'stack',
-						]);
-						expect(body.host).toEqual(config.server.host);
-						expect(body.identifier).toBeString();
-						expect(body.timestamp).toBeString();
-						expect(body.status).toEqual(400);
-						expect(body.name).toEqual('Bad Request');
-						expect(body.message).toEqual('Invalid headers');
-						expect(body.details).toEqual([{
+						validateBody(body, 400, 'Bad Request', 'Invalid headers', [{
 							err: 'message',
 						}]);
-						expect(body.stack).toBeArray();
 						done();
 					},
 				};
@@ -210,27 +165,9 @@ describe.only('[UNIT - CORE] ErrorMiddleware', () => {
 
 				return {
 					json: (body: ParamsError) => {
-						expect(body).toBeObject();
-						expect(body).toContainAllKeys([
-							'host',
-							'identifier',
-							'timestamp',
-							'status',
-							'name',
-							'message',
-							'details',
-							'stack',
-						]);
-						expect(body.host).toEqual(config.server.host);
-						expect(body.identifier).toBeString();
-						expect(body.timestamp).toBeString();
-						expect(body.status).toEqual(400);
-						expect(body.name).toEqual('Bad Request');
-						expect(body.message).toEqual('Invalid params');
-						expect(body.details).toEqual([{
+						validateBody(body, 400, 'Bad Request', 'Invalid params', [{
 							err: 'message',
 						}]);
-						expect(body.stack).toBeArray();
 						done();
 					},
 				};
@@ -252,27 +189,9 @@ describe.only('[UNIT - CORE] ErrorMiddleware', () => {
 
 				return {
 					json: (body: QueryError) => {
-						expect(body).toBeObject();
-						expect(body).toContainAllKeys([
-							'host',
-							'identifier',
-							'timestamp',
-							'status',
-							'name',
-							'message',
-							'details',
-							'stack',
-						]);
-						expect(body.host).toEqual(config.server.host);
-						expect(body.identifier).toBeString();
-						expect(body.timestamp).toBeString();
-						expect(body.status).toEqual(400);
-						expect(body.name).toEqual('Bad Request');
-						expect(body.message).toEqual('Invalid query');
-						expect(body.details).toEqual([{
+						validateBody(body, 400, 'Bad Request', 'Invalid query', [{
 							err: 'message',
 						}]);
-						expect(body.stack).toBeArray();
 						done();
 					},
 				};
