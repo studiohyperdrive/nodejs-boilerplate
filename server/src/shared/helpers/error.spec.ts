@@ -127,16 +127,7 @@ describe('[UNIT - SHARED] Errors', () => {
 	it('Should return a ConflictError', (done) => {
 		const err: ConflictError = new ConflictError();
 
-		expect(err).toBeDefined();
-		expect(err).toBeInstanceOf(ConflictError);
-		expect(err.details).toBeUndefined();
-		expect(err.host).toEqual(config.server.host);
-		expect(err.identifier).toBeString();
-		expect(err.message).toEqual('The request could not be completed due to a conflict with the current state of the target resource');
-		expect(err.name).toEqual('Conflict');
-		expect(err.stack).toBeString();
-		expect(err.status).toEqual(409);
-		expect(err.timestamp).toBeString();
+		validateError(err, ConflictError, 409, 'Conflict', 'The request could not be completed due to a conflict with the current state of the target resource');
 		done();
 	});
 
