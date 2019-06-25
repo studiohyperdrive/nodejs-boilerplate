@@ -6,7 +6,7 @@ import { DataMiddleware } from './data';
 import { ValidationError } from '../helpers/validation/error';
 
 describe('[UNIT - SHARED] DataMiddleware', () => {
-	describe('copy' , () => {
+	describe('Copy' , () => {
 		it('Should copy all request data to req.data', (done) => {
 			const req: Request = mockReq({
 				body: {
@@ -52,7 +52,7 @@ describe('[UNIT - SHARED] DataMiddleware', () => {
 		});
 	});
 
-	describe('validate', () => {
+	describe('Validate', () => {
 		const preset: ValidationPreset = {
 			options: {},
 			schema: Joi.object().required().keys({
