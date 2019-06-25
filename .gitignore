@@ -22,3 +22,6 @@ server/dist
 
 ### Jest ###
 server/test/coverage
+
+### Logs ###
+server/logs

@@ -37,4 +37,4 @@ WORKDIR /app/server
 COPY --from=builder /app/server/tsconfig*.json ./
 COPY --from=builder /app/server/dist ./
 
-CMD node -r tsconfig-paths/register src/app.js
+CMD node -r tsconfig-paths/register index.js

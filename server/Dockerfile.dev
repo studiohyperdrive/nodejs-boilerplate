@@ -16,4 +16,4 @@ ENV PATH /app/node_modules/.bin:$PATH
 WORKDIR /app/server
 
 # Start application with live reload
-CMD ts-node-dev -r tsconfig-paths/register --poll --inspect=0.0.0.0:5858 -- src/app.ts
+CMD ts-node-dev -r tsconfig-paths/register --poll --inspect=0.0.0.0:5858 -- index.ts
