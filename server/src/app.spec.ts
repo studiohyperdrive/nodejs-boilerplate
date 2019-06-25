@@ -1,5 +1,3 @@
-import { Server } from 'http';
-
 import { logger } from '@shared/helpers/logger';
 import { wait } from '@test/helpers/wait';
 

@@ -1,5 +1,5 @@
 import { default as config } from '@config';
-import { ValidationError as JoiValidationError, valid } from 'joi';
+import { ValidationError as JoiValidationError } from 'joi';
 
 import {
 	CustomError,
