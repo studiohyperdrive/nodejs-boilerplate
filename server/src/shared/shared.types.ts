@@ -52,6 +52,7 @@ export type QueryError = CustomError;
 export type UnauthorizedError = CustomError;
 export type ForbiddenError = CustomError;
 export type NotFoundError = CustomError;
+export type ConflictError = CustomError;
 export type InternalServerError = CustomError;
 export type Errors =
 	CustomError |
@@ -62,4 +63,5 @@ export type Errors =
 	UnauthorizedError |
 	ForbiddenError |
 	NotFoundError |
+	ConflictError |
 	InternalServerError;

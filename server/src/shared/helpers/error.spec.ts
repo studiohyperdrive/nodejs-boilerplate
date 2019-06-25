@@ -11,6 +11,7 @@ import {
 	UnauthorizedError,
 	ForbiddenError,
 	NotFoundError,
+	ConflictError,
 	InternalServerError,
 } from './error';
 import { ValidationError } from './validation/error';
@@ -183,7 +184,7 @@ describe('[UNIT - SHARED] Errors', () => {
 		done();
 	});
 
-	it('Should return a default NotFoundError', (done) => {
+	it('Should return a NotFoundError', (done) => {
 		const err: NotFoundError = new NotFoundError();
 
 		expect(err).toBeDefined();
@@ -195,6 +196,22 @@ describe('[UNIT - SHARED] Errors', () => {
 		expect(err.name).toEqual('Not Found');
 		expect(err.stack).toBeString();
 		expect(err.status).toEqual(404);
+		expect(err.timestamp).toBeString();
+		done();
+	});
+
+	it('Should return a ConflictError', (done) => {
+		const err: ConflictError = new ConflictError();
+
+		expect(err).toBeDefined();
+		expect(err).toBeInstanceOf(ConflictError);
+		expect(err.details).toBeUndefined();
+		expect(err.host).toEqual(config.server.host);
+		expect(err.identifier).toBeString();
+		expect(err.message).toEqual('The request could not be completed due to a conflict with the current state of the target resource');
+		expect(err.name).toEqual('Conflict');
+		expect(err.stack).toBeString();
+		expect(err.status).toEqual(409);
 		expect(err.timestamp).toBeString();
 		done();
 	});

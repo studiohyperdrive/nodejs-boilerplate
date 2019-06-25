@@ -1,14 +1,16 @@
+import { AddressInfo } from 'net';
 import { default as express, Application } from 'express';
 import { Server } from 'http';
-import { AddressInfo } from 'net';
 
-import { Core } from '@core';
 import { default as config } from '@config';
 import { ErrorMiddleware } from '@core/middleware/error';
 import { GlobalMiddleware } from '@core/middleware/global';
 import { logger } from '@shared/helpers/logger';
 import { presets as corePresets } from '@core/helpers/presets';
 import { Validator } from '@shared/helpers/validation';
+
+import { Core } from '@core';
+import { Sample } from '@sample';
 
 export class App {
 	public app: Application = express();
@@ -55,6 +57,7 @@ export class App {
 
 	private loadModules(): void {
 		Core.load(this.app);
+		Sample.V1.load(this.app);
 	}
 
 	private loadErrorHandling(): void {

@@ -58,12 +58,6 @@ export class QueryError extends CustomValidationError {
 	public message: string = 'Invalid query';
 }
 
-export class NotFoundError extends CustomError {
-	public message: string = 'Resource not found';
-	public name: string = 'Not Found';
-	public status: number = 404;
-}
-
 export class UnauthorizedError extends CustomError {
 	public message: string = 'Missing authorization';
 	public name: string = 'Unauthorized';
@@ -74,6 +68,18 @@ export class ForbiddenError extends CustomError {
 	public message: string = 'Not allowed';
 	public name: string = 'Forbidden';
 	public status: number = 403;
+}
+
+export class NotFoundError extends CustomError {
+	public message: string = 'Resource not found';
+	public name: string = 'Not Found';
+	public status: number = 404;
+}
+
+export class ConflictError extends CustomError {
+	public message: string = 'The request could not be completed due to a conflict with the current state of the target resource';
+	public name: string = 'Conflict';
+	public status: number = 409;
 }
 
 export class InternalServerError extends CustomError {
