@@ -8,6 +8,9 @@
     "type": "git",
     "url": "git+https://github.com/studiohyperdrive/nodejs-boilerplate.git"
   },
+  "bugs": {
+    "url": "https://github.com/studiohyperdrive/nodejs-boilerplate/issues"
+  },
   "contributors": [
     "Thomas Bormans <thomas.bormans@studiohyperdrive.be>",
     "Niels Bril <niels.bril@studiohyperdrive.be>",
