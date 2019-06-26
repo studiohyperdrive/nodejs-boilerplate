@@ -26,6 +26,7 @@
     "helmet": "3.18.0",
     "joi": "14.3.1",
     "ramda": "0.26.1",
+    "reflect-metadata": "0.1.13",
     "swagger-express-ts": "1.0.1",
     "swagger-ui-express": "4.0.6",
     "tsconfig-paths": "3.8.0",
