@@ -76,6 +76,12 @@ export class NotFoundError extends CustomError {
 	public status: number = 404;
 }
 
+export class ConflictError extends CustomError {
+	public message: string = 'The request could not be completed due to a conflict with the current state of the target resource';
+	public name: string = 'Conflict';
+	public status: number = 409;
+}
+
 export class InternalServerError extends CustomError {
 	public message: string = 'Something went wrong';
 	public name: string = 'Internal Server Error';

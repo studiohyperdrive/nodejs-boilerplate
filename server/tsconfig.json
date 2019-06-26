@@ -16,7 +16,7 @@
 		"sourceMap": true,
 		"strictBindCallApply": true,
 		"strictFunctionTypes": true,
-		"strictNullChecks": true,
+		"strictNullChecks": false,
 		"lib": [
 			"dom",
 			"es2015"
@@ -37,6 +37,8 @@
 			"@mocks": ["test/mocks"],
 			"@mocks/*": ["test/mocks/*"],
 			"@pkg": ["package.json"],
+			"@sample": ["src/sample"],
+			"@sample/*": ["src/sample/*"],
 			"@shared": ["src/shared"],
 			"@shared/*": ["src/shared/*"],
 			"@test": ["test"],

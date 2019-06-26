@@ -27,8 +27,6 @@
     "joi": "14.3.1",
     "ramda": "0.26.1",
     "tsconfig-paths": "3.8.0",
-    "typescript-rest": "2.2.0",
-    "typescript-rest-swagger": "1.0.3",
     "uuid": "3.3.2"
   },
   "devDependencies": {

@@ -11,6 +11,7 @@ import {
 	UnauthorizedError,
 	ForbiddenError,
 	NotFoundError,
+	ConflictError,
 	InternalServerError,
 } from './error';
 import { CustomErrorDetail } from '../shared.types';
@@ -116,10 +117,17 @@ describe('[UNIT - SHARED] Errors', () => {
 		done();
 	});
 
-	it('Should return a default NotFoundError', (done) => {
+	it('Should return a NotFoundError', (done) => {
 		const err: NotFoundError = new NotFoundError();
 
 		validateError(err, NotFoundError, 404, 'Not Found', 'Resource not found');
+		done();
+	});
+
+	it('Should return a ConflictError', (done) => {
+		const err: ConflictError = new ConflictError();
+
+		validateError(err, ConflictError, 409, 'Conflict', 'The request could not be completed due to a conflict with the current state of the target resource');
 		done();
 	});
 
