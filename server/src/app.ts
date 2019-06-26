@@ -7,6 +7,7 @@ import { ErrorMiddleware } from '@core/middleware/error';
 import { GlobalMiddleware } from '@core/middleware/global';
 import { logger } from '@shared/helpers/logger';
 import { presets as corePresets } from '@core/helpers/presets';
+import { SwaggerMiddleware } from '@core/middleware/swagger';
 import { Validator } from '@shared/helpers/validation';
 
 import { Core } from '@core';
@@ -53,6 +54,12 @@ export class App {
 
 	private loadMiddleware(): void {
 		GlobalMiddleware.load(this.app);
+		if (config.state.docs) {
+			SwaggerMiddleware.load(this.app, {
+				...Core.models,
+				...Sample.V1.models,
+			});
+		}
 	}
 
 	private loadModules(): void {
