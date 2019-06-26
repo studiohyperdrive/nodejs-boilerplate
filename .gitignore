@@ -1,5 +1,5 @@
-# Created by https://www.gitignore.io/api/node,linux,macos,windows
-# Edit at https://www.gitignore.io/?templates=node,linux,macos,windows
+# Created by https://www.gitignore.io/api/node,linux,macos,windows,visualstudiocode
+# Edit at https://www.gitignore.io/?templates=node,linux,macos,windows,visualstudiocode
 
 ### Linux ###
 *~
@@ -103,11 +103,18 @@ typings/
 # Optional REPL history
 .node_repl_history
 
-# dotenv environment variables file
-.env
-.env.test
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
 
-# End of https://www.gitignore.io/api/node,linux,macos,windows
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+
+# End of https://www.gitignore.io/api/node,linux,macos,windows,visualstudiocode
 
 ### Project related ###
 # Dist folder
