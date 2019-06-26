@@ -40,13 +40,13 @@ export const models: SwaggerModels = {
 			},
 			details: {
 				type: SwaggerDefinitionConstant.ARRAY,
-				model: 'ErrorDetail',
+				itemType: 'ErrorDetail',
 				required: true,
 				example: [[{ err: 'message' }]],
 			},
 			stack: {
 				type: SwaggerDefinitionConstant.ARRAY,
-				model: SwaggerDefinitionConstant.STRING,
+				itemType: SwaggerDefinitionConstant.STRING,
 				required: true,
 				example: [['stack']],
 			},
