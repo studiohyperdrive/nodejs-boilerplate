@@ -1,4 +1,4 @@
-# NODEJS-BOILERPLATE 2.0 - SERVER #
+# NODEJS-BOILERPLATE 2.0 #
 Studio Hyperdrive Node.js 2.0 boilerplate
 
 ## Setup ##
@@ -52,7 +52,7 @@ In case of bugs, issues, questions, ... check the [issues](https://github.com/st
 
 ## Contributions ##
 
-Contributions through pull requests are more than welcome. Make sure you respect the current tools, guidelines and flow to get your improved version accpeted.
+Contributions through pull requests are more than welcome. Make sure you respect the current tools, guidelines and flow to get your improved version accepted.
 
 ## License ##
 
