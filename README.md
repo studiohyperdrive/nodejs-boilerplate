@@ -56,4 +56,4 @@ Contributions through pull requests are more than welcome. Make sure you respect
 
 ## License ##
 
-TBD
+See [LICENSE](LICENSE).

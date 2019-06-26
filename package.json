@@ -19,5 +19,6 @@
     "@commitlint/cli": "8.0.0",
     "@commitlint/config-conventional": "8.0.0",
     "husky": "2.4.1"
-  }
+  },
+  "license": "ISC"
 }
