@@ -8,6 +8,9 @@
     "type": "git",
     "url": "git+https://github.com/studiohyperdrive/nodejs-boilerplate.git"
   },
+  "bugs": {
+    "url": "https://github.com/studiohyperdrive/nodejs-boilerplate/issues"
+  },
   "contributors": [
     "Thomas Bormans <thomas.bormans@studiohyperdrive.be>",
     "Niels Bril <niels.bril@studiohyperdrive.be>",
@@ -19,5 +22,6 @@
     "@commitlint/cli": "8.0.0",
     "@commitlint/config-conventional": "8.0.0",
     "husky": "2.4.1"
-  }
+  },
+  "license": "ISC"
 }
