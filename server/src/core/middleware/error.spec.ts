@@ -1,11 +1,14 @@
 import { mockReq, mockRes } from 'sinon-express-mock';
 
+import { Config } from '@config/config.types';
 import { CustomError, BodyError, HeadersError, ParamsError, QueryError } from '@shared/helpers/error';
 import { default as config } from '@config';
 import { Request, Response, CustomErrorDetail } from '@shared/shared.types';
 import { ValidationError } from '@shared/helpers/validation/error';
 
 import { ErrorMiddleware } from './error';
+
+const cfg: Config = config();
 
 const validateBody = (body: any, status: number, name: string, message: string, details?: CustomErrorDetail[]): void => { // tslint:disable-line no-any
 	expect(body).toBeObject();
@@ -19,7 +22,7 @@ const validateBody = (body: any, status: number, name: string, message: string, 
 		'details',
 		'stack',
 	]);
-	expect(body.host).toEqual(config.server.host);
+	expect(body.host).toEqual(cfg.server.host);
 	expect(body.identifier).toBeString();
 	expect(body.timestamp).toBeString();
 	expect(body.status).toEqual(status);

@@ -1,5 +1,7 @@
-import { default as config } from '@config';
 import { ValidationError as JoiValidationError } from 'joi';
+
+import { Config } from '@config/config.types';
+import { default as config } from '@config';
 
 import {
 	CustomError,
@@ -17,10 +19,12 @@ import {
 import { CustomErrorDetail } from '../shared.types';
 import { ValidationError } from './validation/error';
 
+const cfg: Config = config();
+
 const validateError = <T>(err: CustomError, type: T, status: number, name: string, message: string, details?: CustomErrorDetail[]): void => {
 	expect(err).toBeDefined();
 	expect(err).toBeInstanceOf(type);
-	expect(err.host).toEqual(config.server.host);
+	expect(err.host).toEqual(cfg.server.host);
 	expect(err.identifier).toBeString();
 	expect(err.message).toEqual(message);
 	expect(err.name).toEqual(name);

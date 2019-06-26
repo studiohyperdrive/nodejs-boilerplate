@@ -1,4 +1,5 @@
 import { Application } from 'express';
+import { Config }  from '@config/config.types';
 import { default as config }  from '@config';
 import { express as swaggerExpress, SwaggerDefinitionConstant } from 'swagger-express-ts';
 import { serve as swaggerServe, setup as swaggerSetup } from 'swagger-ui-express';
@@ -7,6 +8,8 @@ import { name, version } from '@pkg';
 import { SwaggerModels } from '@shared/shared.types';
 
 export class SwaggerMiddleware {
+	public static config: Config = config();
+
 	public static load(app: Application, models: SwaggerModels): void {
 		app.use(swaggerExpress({
 			path: '/docs/json',
@@ -16,7 +19,7 @@ export class SwaggerMiddleware {
 					version,
 					title: name,
 				},
-				host: config.server.host,
+				host: this.config.server.host,
 				responses: {
 					500: {
 						description: 'Internal Server Error',
