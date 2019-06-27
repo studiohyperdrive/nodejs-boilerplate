@@ -6,15 +6,15 @@ import { Request, Response } from '@shared/shared.types';
 import { Sample } from '../sample.types';
 
 @ApiPath({
-    name: 'Sample',
-    path: '/v1/samples',
+	name: 'Sample',
+	path: '/v1/samples',
 })
 export class SampleController {
 	@ApiOperationGet({
 		description: 'Get samples',
 		summary: 'Get all samples',
-        responses: {
-            200: {
+		responses: {
+			200: {
 				description: 'OK',
 				type: SwaggerDefinitionConstant.Response.Type.ARRAY,
 				model: 'Sample',
@@ -25,7 +25,7 @@ export class SampleController {
 				model: 'Error',
 			},
 		},
-    })
+	})
 	public getAll(req: Request, res: Response): Response {
 		return res.status(200).json([{
 			id: 1,
@@ -45,8 +45,8 @@ export class SampleController {
 				},
 			},
 		},
-        responses: {
-            200: {
+		responses: {
+			200: {
 				description: 'OK',
 				type: SwaggerDefinitionConstant.Response.Type.OBJECT,
 				model: 'Sample',
@@ -57,7 +57,7 @@ export class SampleController {
 				model: 'Error',
 			},
 		},
-    })
+	})
 	public getById(req: Request, res: Response): Response {
 		if (req.data.params.id !== 1) {
 			throw new NotFoundError();
@@ -79,8 +79,8 @@ export class SampleController {
 				model: 'Sample',
 			},
 		},
-        responses: {
-            200: {
+		responses: {
+			200: {
 				description: 'OK',
 				type: SwaggerDefinitionConstant.Response.Type.OBJECT,
 				model: 'Sample',
@@ -96,7 +96,7 @@ export class SampleController {
 				model: 'Error',
 			},
 		},
-    })
+	})
 	public create(req: Request, res: Response): Response {
 		if (req.data.body.id === 1) {
 			throw new ConflictError();
