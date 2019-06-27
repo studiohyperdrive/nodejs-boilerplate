@@ -1,14 +1,15 @@
 import { default as supertest } from 'supertest';
 
-import { App } from '@app';
-import { Config } from '@config/config.types';
+import { App, CONFIG } from '@app';
 import { default as config } from '@config';
 
-const cfg: Config = config();
+let api: supertest.SuperTest<supertest.Test>;
 
 describe('[INTEGRATION - CORE] Docs route', () => {
 	describe('Enabled', () => {
-		const api = supertest(new App(false).app);
+		beforeAll(() => {
+			api = supertest(new App(false).app);
+		});
 
 		it('Should return the swagger documentation', (done) => {
 			api.get('/docs')
@@ -34,8 +35,10 @@ describe('[INTEGRATION - CORE] Docs route', () => {
 	});
 
 	describe('Disabled', () => {
-		process.env.STATE_DOCS = 'false';
-		const api = supertest(new App(false).app);
+		beforeAll(() => {
+			CONFIG.state.docs = false;
+			api = supertest(new App(false).app);
+		});
 
 		it('Should return the fallback route on requesting the swagger documentation', (done) => {
 			api.get('/docs')
@@ -51,7 +54,7 @@ describe('[INTEGRATION - CORE] Docs route', () => {
 						'message',
 						'stack',
 					]);
-					expect(res.body.host).toEqual(cfg.server.host);
+					expect(res.body.host).toEqual(config.server.host);
 					expect(res.body.identifier).toBeString();
 					expect(res.body.timestamp).toBeString();
 					expect(res.body.status).toEqual(404);
@@ -78,7 +81,7 @@ describe('[INTEGRATION - CORE] Docs route', () => {
 						'message',
 						'stack',
 					]);
-					expect(res.body.host).toEqual(cfg.server.host);
+					expect(res.body.host).toEqual(config.server.host);
 					expect(res.body.identifier).toBeString();
 					expect(res.body.timestamp).toBeString();
 					expect(res.body.status).toEqual(404);

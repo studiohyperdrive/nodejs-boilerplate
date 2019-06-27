@@ -2,7 +2,7 @@ import { Config, LoggerPresets } from './config.types';
 import { default as loggerPresets } from './presets/logger';
 import { EnvHelper } from './helpers/env';
 
-export default () => ({
+export default {
 	state: {
 		env: process.env.NODE_ENV,
 		docs: EnvHelper.envToBoolean(process.env.STATE_DOCS),
@@ -15,4 +15,4 @@ export default () => ({
 		timezone: process.env.TZ,
 	},
 	logger: loggerPresets[process.env['LOGGING_PRESET'] as LoggerPresets],
-} as Config);
+} as Config;

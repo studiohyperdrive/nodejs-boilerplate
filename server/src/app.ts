@@ -16,7 +16,7 @@ import { Sample } from '@sample';
 
 export class App {
 	public app: Application = express();
-	public config: Config = config();
+	public config: Config = CONFIG;
 	public server: Server;
 
 	constructor(start: boolean = true) {
@@ -74,3 +74,4 @@ export class App {
 		this.app.use(ErrorMiddleware.handleError);
 	}
 }
+export const CONFIG: Config = config;

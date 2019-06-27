@@ -2,17 +2,14 @@ import { default as uuid } from 'uuid';
 import { pathOr } from 'ramda';
 import { ValidationErrorItem } from 'joi';
 
-import { Config } from '@config/config.types';
 import { default as config } from '@config';
 
 import { CustomError as ICustomError, CustomErrorDetail as ICustomErrorDetail } from '../shared.types';
 import { ValidationError } from './validation/error';
 
-const cfg: Config = config();
-
 export class CustomError implements ICustomError {
 	public details?: ICustomErrorDetail[];
-	public host: string = cfg.server.host;
+	public host: string = config.server.host;
 	public identifier: string = uuid();
 	public message: string = 'Something went wrong';
 	public name: string = 'Error';
@@ -26,7 +23,7 @@ export class CustomError implements ICustomError {
 		if (err) {
 			this.message = err.message;
 			this.name = err.name;
-			this.stack = cfg.state.env === 'local' || cfg.state.env === 'test' ? err.stack : undefined;
+			this.stack = config.state.env === 'local' || config.state.env === 'test' ? err.stack : undefined;
 		}
 	}
 }
