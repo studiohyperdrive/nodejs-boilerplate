@@ -1,4 +1,7 @@
 # NODEJS-BOILERPLATE 2.0 #
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/studiohyperdrive/nodejs-boilerplate.svg)](https://greenkeeper.io/)
+
 Studio Hyperdrive Node.js 2.0 boilerplate
 
 ## Setup ##
