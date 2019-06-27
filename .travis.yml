@@ -3,7 +3,7 @@ services:
   - docker
 
 before_install:
-  - docker build -t nodejs-boilerplate-server -f ./server/Dockerfile.dev ./server
+  - docker build -t nodejs-boilerplate-server:test -f ./server/Dockerfile.test ./server
 
 script:
-  - docker run nodejs-boilerplate-server npm run test
+  - docker run nodejs-boilerplate-server:test
