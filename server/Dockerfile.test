@@ -1,5 +1,8 @@
 FROM node:dubnium-alpine
 
+# Install codecov
+RUN apk add --update py-pip && pip install codecov
+
 # Install latest npm version
 RUN npm i --global --silent npm@latest
 

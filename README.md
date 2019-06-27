@@ -1,6 +1,8 @@
 # NODEJS-BOILERPLATE 2.0 #
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/studiohyperdrive/nodejs-boilerplate.svg)](https://greenkeeper.io/)
+[![Travis CI badge](https://travis-ci.org/studiohyperdrive/nodejs-boilerplate.png?branch=master)](https://travis-ci.org/studiohyperdrive/nodejs-boilerplate)
+[![Greenkeeper badge](https://badges.greenkeeper.io/studiohyperdrive/nodejs-boilerplate.svg)](https://greenkeeper.io)
+[![License badge](https://img.shields.io/badge/license-ISC-yellow.svg)](https://opensource.org/licenses/ISC)
 
 Studio Hyperdrive Node.js 2.0 boilerplate
 

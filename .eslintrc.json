@@ -1,0 +1,25 @@
+{
+	"extends": [
+		"eslint:recommended",
+		"airbnb"
+	],
+	"plugins": [
+		"json"
+	],
+	"env": {
+		"node": true
+	},
+	"rules": {
+		"indent": [2, "tab"],
+		"max-len": [2, 160, 2, {
+			"ignoreUrls": true,
+			"ignoreComments": true,
+			"ignoreRegExpLiterals": true,
+			"ignoreStrings": true,
+			"ignoreTemplateLiterals": true
+		}],
+		"no-tabs": [0, {
+			"allowIndentationTabs": true
+		}]
+	}
+}
