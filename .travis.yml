@@ -1,0 +1,9 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t nodejs-boilerplate-server -f ./server/Dockerfile.dev ./server
+
+script:
+  - docker run nodejs-boilerplate-server npm run test
