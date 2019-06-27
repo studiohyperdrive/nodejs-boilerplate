@@ -46,11 +46,11 @@
 		}
 	},
 	"include": [
-		"src/**/*.ts",
-		"src/**/*.spec.ts",
-		"test/**/*.spec.ts"
+		"**/*.ts"
 	],
 	"exclude": [
-		"node_modules"
+		"**/coverage/**",
+		"**/dist/**",
+		"**/node_modules/**"
 	]
 }

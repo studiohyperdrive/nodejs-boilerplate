@@ -1,7 +1,7 @@
 {
 	"extends": [
 		"eslint:recommended",
-		"airbnb"
+		"airbnb-base"
 	],
 	"plugins": [
 		"json"
@@ -10,6 +10,7 @@
 		"node": true
 	},
 	"rules": {
+		"import/no-unresolved": 0,
 		"indent": [2, "tab"],
 		"max-len": [2, 160, 2, {
 			"ignoreUrls": true,
