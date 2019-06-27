@@ -1,0 +1,47 @@
+{
+	// See https://go.microsoft.com/fwlink/?LinkId=733558
+	// for the documentation about the tasks.json format
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "npm test (server) (Docker)",
+			"type": "shell",
+			"command": "docker-compose exec server npm test",
+			"group": "test",
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated"
+			}
+		},
+		{
+			"label": "npm run lint (server) (Docker)",
+			"type": "shell",
+			"command": "docker-compose exec server npm run lint",
+			"group": "test",
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated"
+			}
+		},
+		{
+			"label": "build image (server) (Docker)",
+			"type": "shell",
+			"command": "docker build -t nodejs-boilerplate-server ./server",
+			"group": "build",
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated"
+			}
+		},
+		{
+			"label": "run image (server) (Docker)",
+			"type": "shell",
+			"command": "docker run --init --rm -it --env-file=./server/.env/local.env nodejs-boilerplate-server",
+			"group": "build",
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated"
+			}
+		}
+	]
+}
