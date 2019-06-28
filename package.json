@@ -28,7 +28,7 @@
     "eslint-config-recommended": "4.0.0",
     "eslint-plugin-import": "2.18.0",
     "eslint-plugin-json": "1.4.0",
-    "husky": "2.4.1"
+    "husky": "2.7.0"
   },
   "license": "ISC"
 }

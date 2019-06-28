@@ -65,3 +65,10 @@ export type Errors =
 	NotFoundError |
 	ConflictError |
 	InternalServerError;
+
+// Swagger
+import { ISwaggerBuildDefinitionModel } from 'swagger-express-ts/swagger.builder';
+
+export interface SwaggerModels {
+	[key: string]: ISwaggerBuildDefinitionModel;
+}
