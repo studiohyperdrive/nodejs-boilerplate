@@ -34,7 +34,7 @@ export class SwaggerMiddleware {
 			false, // Custom CSS
 			false, // Custom favicon
 			'/docs/json', // URL for swagger file
-			name, // Title for documentation page
+			name // Title for documentation page
 		));
 	}
 }

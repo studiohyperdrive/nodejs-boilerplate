@@ -11,14 +11,14 @@ export class CoreRoutes {
 	public static load(app: Application): void {
 		// Get status
 		app.route(`${this.baseUrl}status`).get(
-			this.statusController.get,
+			this.statusController.get
 		);
 	}
 
 	public static loadFallback(app: Application): void {
 		// Get fallback
 		app.route(['/', '/*']).all(
-			this.fallbackController.get,
+			this.fallbackController.get
 		);
 	}
 }
