@@ -1,8 +1,13 @@
 import { Application } from 'express';
 
+import { SwaggerModels } from '@shared/shared.types';
+
 import { CoreRoutes } from './routes';
+import { models } from './core.models';
 
 export class Core {
+	public static models: SwaggerModels = models;
+
 	public static load(app: Application): void {
 		CoreRoutes.load(app);
 	}

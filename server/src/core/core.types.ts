@@ -1,4 +1,4 @@
 export interface Status {
-	version: string;
 	success: boolean;
+	version: string;
 }
