@@ -3,9 +3,16 @@ services:
   - docker
 
 before_install:
-  - npm install
   - docker build -t nodejs-boilerplate-server:test -f ./server/Dockerfile.test ./server
+
+install:
+  - npm install -g codecov
+  - npm install
 
 script:
   - npm run lint
-  - docker run nodejs-boilerplate-server:test
+  - docker run -v /tmp/coverage:/app/server/test/coverage nodejs-boilerplate-server:test
+
+after_success:
+  - codecov -f /tmp/coverage/lcov.info -t f00e25b3-f357-4c83-a4c4-c9a55950e2c2
+
