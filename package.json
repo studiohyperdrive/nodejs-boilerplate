@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "description": "Node.js boilerplate by Studio Hyperdrive for REST API's.",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "lint": "eslint . --ext .js --ext .json"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/studiohyperdrive/nodejs-boilerplate.git"
@@ -21,6 +23,11 @@
   "devDependencies": {
     "@commitlint/cli": "8.0.0",
     "@commitlint/config-conventional": "8.0.0",
+    "eslint": "6.0.1",
+    "eslint-config-airbnb-base": "13.1.0",
+    "eslint-config-recommended": "4.0.0",
+    "eslint-plugin-import": "2.18.0",
+    "eslint-plugin-json": "1.4.0",
     "husky": "2.7.0"
   },
   "license": "ISC"
