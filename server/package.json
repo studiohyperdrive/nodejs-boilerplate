@@ -2,7 +2,7 @@
   "name": "@studiohyperdrive/nodejs-boilerplate-server",
   "version": "0.0.0",
   "description": "Server directory for the Node.js boilerplate.",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "start": "npm run serve",
     "serve": "ts-node-dev -r tsconfig-paths/register --poll --inspect=0.0.0.0:5858 -- src/index.ts",
