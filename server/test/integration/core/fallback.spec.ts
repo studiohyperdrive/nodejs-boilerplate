@@ -6,7 +6,7 @@ import { default as config } from '@config';
 const api = supertest(new App(false).app);
 
 describe('[INTEGRATION - CORE] Fallback route', () => {
-	it('Should return the fallback route', (done) => {
+	it('Should return the fallback route', (done: jest.DoneCallback) => {
 		api.get('/gibberish')
 			.expect(404)
 			.then((res: supertest.Response) => {

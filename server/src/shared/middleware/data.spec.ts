@@ -7,7 +7,7 @@ import { ValidationError } from '../helpers/validation/error';
 
 describe('[UNIT - SHARED] DataMiddleware', () => {
 	describe('Copy' , () => {
-		it('Should copy all request data to req.data', (done) => {
+		it('Should copy all request data to req.data', (done: jest.DoneCallback) => {
 			const req: Request = mockReq({
 				body: {
 					key: 'body',
@@ -60,7 +60,7 @@ describe('[UNIT - SHARED] DataMiddleware', () => {
 			}),
 		};
 
-		it('Should progress if there are no errors', (done) => {
+		it('Should progress if there are no errors', (done: jest.DoneCallback) => {
 			const req: Request = mockReq({
 				data: {
 					body: {
@@ -84,7 +84,7 @@ describe('[UNIT - SHARED] DataMiddleware', () => {
 			});
 		});
 
-		it('Should throw an error if there are errors', (done) => {
+		it('Should throw an error if there are errors', (done: jest.DoneCallback) => {
 			const req: Request = mockReq({
 				data: {
 					body: {
@@ -101,7 +101,7 @@ describe('[UNIT - SHARED] DataMiddleware', () => {
 			done();
 		});
 
-		it('Should throw an error if there if the data hasn\'t been cloned to req.data', (done) => {
+		it('Should throw an error if there if the data hasn\'t been cloned to req.data', (done: jest.DoneCallback) => {
 			const req: Request = mockReq();
 			const res: Response = mockRes();
 			const next: Next = () => {};

@@ -6,7 +6,7 @@ import { version } from '@pkg';
 const api = supertest(new App(false).app);
 
 describe('[INTEGRATION - CORE] Status route', () => {
-	it('Should return the server status', (done) => {
+	it('Should return the server status', (done: jest.DoneCallback) => {
 		api.get('/status')
 			.expect(200)
 			.then((res: supertest.Response) => {

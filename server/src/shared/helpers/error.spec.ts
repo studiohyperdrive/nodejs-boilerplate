@@ -45,21 +45,21 @@ describe('[UNIT - SHARED] Errors', () => {
 		}],
 	};
 
-	it('Should return a default CustomError', (done) => {
+	it('Should return a default CustomError', (done: jest.DoneCallback) => {
 		const err: CustomError = new CustomError();
 
 		validateError(err, CustomError, 500, 'Error', 'Something went wrong');
 		done();
 	});
 
-	it('Should return a CustomError based on another error', (done) => {
+	it('Should return a CustomError based on another error', (done: jest.DoneCallback) => {
 		const err: CustomError = new CustomError(new TypeError('Invalid type'));
 
 		validateError(err, CustomError, 500, 'TypeError', 'Invalid type');
 		done();
 	});
 
-	it('Should return a default CustomValidationError', (done) => {
+	it('Should return a default CustomValidationError', (done: jest.DoneCallback) => {
 		const err: CustomValidationError = new CustomValidationError(new ValidationError('Validation failed', validation as JoiValidationError));
 
 		validateError(err, CustomValidationError, 400, 'Bad Request', 'Invalid object', [{
@@ -68,7 +68,7 @@ describe('[UNIT - SHARED] Errors', () => {
 		done();
 	});
 
-	it('Should return a BodyError', (done) => {
+	it('Should return a BodyError', (done: jest.DoneCallback) => {
 		const err: BodyError = new BodyError(new ValidationError('body', validation as JoiValidationError));
 
 		validateError(err, BodyError, 400, 'Bad Request', 'Invalid body', [{
@@ -77,7 +77,7 @@ describe('[UNIT - SHARED] Errors', () => {
 		done();
 	});
 
-	it('Should return a HeadersError', (done) => {
+	it('Should return a HeadersError', (done: jest.DoneCallback) => {
 		const err: HeadersError = new HeadersError(new ValidationError('headers', validation as JoiValidationError));
 
 		validateError(err, HeadersError, 400, 'Bad Request', 'Invalid headers', [{
@@ -86,7 +86,7 @@ describe('[UNIT - SHARED] Errors', () => {
 		done();
 	});
 
-	it('Should return a ParamsError', (done) => {
+	it('Should return a ParamsError', (done: jest.DoneCallback) => {
 		const err: ParamsError = new ParamsError(new ValidationError('params', validation as JoiValidationError));
 
 		validateError(err, ParamsError, 400, 'Bad Request', 'Invalid params', [{
@@ -95,7 +95,7 @@ describe('[UNIT - SHARED] Errors', () => {
 		done();
 	});
 
-	it('Should return a QueryError', (done) => {
+	it('Should return a QueryError', (done: jest.DoneCallback) => {
 		const err: QueryError = new QueryError(new ValidationError('query', validation as JoiValidationError));
 
 		validateError(err, QueryError, 400, 'Bad Request', 'Invalid query', [{
@@ -104,35 +104,35 @@ describe('[UNIT - SHARED] Errors', () => {
 		done();
 	});
 
-	it('Should return a UnauthorizedError', (done) => {
+	it('Should return a UnauthorizedError', (done: jest.DoneCallback) => {
 		const err: UnauthorizedError = new UnauthorizedError();
 
 		validateError(err, UnauthorizedError, 401, 'Unauthorized', 'Missing authorization');
 		done();
 	});
 
-	it('Should return a ForbiddenError', (done) => {
+	it('Should return a ForbiddenError', (done: jest.DoneCallback) => {
 		const err: ForbiddenError = new ForbiddenError();
 
 		validateError(err, ForbiddenError, 403, 'Forbidden', 'Not allowed');
 		done();
 	});
 
-	it('Should return a NotFoundError', (done) => {
+	it('Should return a NotFoundError', (done: jest.DoneCallback) => {
 		const err: NotFoundError = new NotFoundError();
 
 		validateError(err, NotFoundError, 404, 'Not Found', 'Resource not found');
 		done();
 	});
 
-	it('Should return a ConflictError', (done) => {
+	it('Should return a ConflictError', (done: jest.DoneCallback) => {
 		const err: ConflictError = new ConflictError();
 
 		validateError(err, ConflictError, 409, 'Conflict', 'The request could not be completed due to a conflict with the current state of the target resource');
 		done();
 	});
 
-	it('Should return a InternalServerError', (done) => {
+	it('Should return a InternalServerError', (done: jest.DoneCallback) => {
 		const err: InternalServerError = new InternalServerError();
 
 		validateError(err, InternalServerError, 500, 'Internal Server Error', 'Something went wrong');

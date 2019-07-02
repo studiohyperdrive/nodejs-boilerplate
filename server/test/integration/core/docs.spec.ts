@@ -11,7 +11,7 @@ describe('[INTEGRATION - CORE] Docs route', () => {
 			api = supertest(new App(false).app);
 		});
 
-		it('Should return the swagger documentation', (done) => {
+		it('Should return the swagger documentation', (done: jest.DoneCallback) => {
 			api.get('/docs')
 				.redirects(1)
 				.expect(200)
@@ -23,7 +23,7 @@ describe('[INTEGRATION - CORE] Docs route', () => {
 				.catch(done);
 		});
 
-		it('Should return the swagger documentation (JSON)', (done) => {
+		it('Should return the swagger documentation (JSON)', (done: jest.DoneCallback) => {
 			api.get('/docs/json')
 				.expect(200)
 				.then((res: supertest.Response) => {
@@ -40,7 +40,7 @@ describe('[INTEGRATION - CORE] Docs route', () => {
 			api = supertest(new App(false).app);
 		});
 
-		it('Should return the fallback route on requesting the swagger documentation', (done) => {
+		it('Should return the fallback route on requesting the swagger documentation', (done: jest.DoneCallback) => {
 			api.get('/docs')
 				.expect(404)
 				.then((res: supertest.Response) => {
@@ -67,7 +67,7 @@ describe('[INTEGRATION - CORE] Docs route', () => {
 				.catch(done);
 		});
 
-		it('Should return the fallback route on requesting the swagger documentation (JSON)', (done) => {
+		it('Should return the fallback route on requesting the swagger documentation (JSON)', (done: jest.DoneCallback) => {
 			api.get('/docs/json')
 				.expect(404)
 				.then((res: supertest.Response) => {

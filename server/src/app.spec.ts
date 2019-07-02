@@ -24,7 +24,7 @@ describe('[UNIT - APP] Application', () => {
 		loggerInfoSpy.mockRestore();
 	});
 
-	it('Should start an Express server using the constructor', async (done) => {
+	it('Should start an Express server using the constructor', async (done: jest.DoneCallback) => {
 		app = new App();
 
 		await wait(500);
@@ -38,7 +38,7 @@ describe('[UNIT - APP] Application', () => {
 		done();
 	});
 
-	it('Should start an Express server', async (done) => {
+	it('Should start an Express server', async (done: jest.DoneCallback) => {
 		app.start();
 
 		await wait(500);
@@ -52,7 +52,7 @@ describe('[UNIT - APP] Application', () => {
 		done();
 	});
 
-	it('Should start an Express server and error', async (done) => {
+	it('Should start an Express server and error', async (done: jest.DoneCallback) => {
 		const error: Error = new Error();
 		app.app.listen = ((port: number, callback: (err?: Error) => void) => {
 			callback(error);
@@ -67,7 +67,7 @@ describe('[UNIT - APP] Application', () => {
 		done();
 	});
 
-	it('Should stop the Express server on SIGTERM', async (done) => {
+	it('Should stop the Express server on SIGTERM', async (done: jest.DoneCallback) => {
 		app.start();
 
 		await wait(500);
@@ -86,7 +86,7 @@ describe('[UNIT - APP] Application', () => {
 		done();
 	});
 
-	it('Should stop the Express server on SIGTERM and error', async (done) => {
+	it('Should stop the Express server on SIGTERM and error', async (done: jest.DoneCallback) => {
 		app.start();
 		const error: Error = new Error();
 		const close: Function = app.server.close;
@@ -113,7 +113,7 @@ describe('[UNIT - APP] Application', () => {
 		done();
 	});
 
-	it('Should stop the Express server on SIGINT', async (done) => {
+	it('Should stop the Express server on SIGINT', async (done: jest.DoneCallback) => {
 		app.start();
 
 		await wait(500);
@@ -132,7 +132,7 @@ describe('[UNIT - APP] Application', () => {
 		done();
 	});
 
-	it('Should stop the Express server on SIGINT and error', async (done) => {
+	it('Should stop the Express server on SIGINT and error', async (done: jest.DoneCallback) => {
 		app.start();
 		const error: Error = new Error();
 		const close: Function = app.server.close;

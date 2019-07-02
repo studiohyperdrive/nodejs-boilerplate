@@ -6,7 +6,7 @@ const api = supertest(new App(false).app);
 
 describe('[INTEGRATION - SAMPLE] Samples route', () => {
 	describe('Get all samples', () => {
-		it('Should return all samples', (done) => {
+		it('Should return all samples', (done: jest.DoneCallback) => {
 			api.get('/v1/samples')
 				.expect(200)
 				.then((res: supertest.Response) => {
@@ -23,7 +23,7 @@ describe('[INTEGRATION - SAMPLE] Samples route', () => {
 	});
 
 	describe('Get sample by id', () => {
-		it('Should return a sample by it\'s id', (done) => {
+		it('Should return a sample by it\'s id', (done: jest.DoneCallback) => {
 			api.get('/v1/samples/1')
 				.expect(200)
 				.then((res: supertest.Response) => {
@@ -37,7 +37,7 @@ describe('[INTEGRATION - SAMPLE] Samples route', () => {
 				.catch(done);
 		});
 
-		it('Should return 404 Not Found on an unknown id', (done) => {
+		it('Should return 404 Not Found on an unknown id', (done: jest.DoneCallback) => {
 			api.get('/v1/samples/2')
 				.expect(404)
 				.then((res: supertest.Response) => {
@@ -61,7 +61,7 @@ describe('[INTEGRATION - SAMPLE] Samples route', () => {
 	});
 
 	describe('Create sample', () => {
-		it('Should return a created sample', (done) => {
+		it('Should return a created sample', (done: jest.DoneCallback) => {
 			api.post('/v1/samples')
 				.send({
 					id: 2,
@@ -78,7 +78,7 @@ describe('[INTEGRATION - SAMPLE] Samples route', () => {
 				.catch(done);
 		});
 
-		it('Should return 400 Bad Request on an invalid body', (done) => {
+		it('Should return 400 Bad Request on an invalid body', (done: jest.DoneCallback) => {
 			api.post('/v1/samples')
 				.expect(400)
 				.then((res: supertest.Response) => {
@@ -101,7 +101,7 @@ describe('[INTEGRATION - SAMPLE] Samples route', () => {
 				.catch(done);
 		});
 
-		it('Should return 409 Conflict on an existing sample', (done) => {
+		it('Should return 409 Conflict on an existing sample', (done: jest.DoneCallback) => {
 			api.post('/v1/samples')
 				.send({
 					id: 1,
