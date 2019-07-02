@@ -1,6 +1,7 @@
 {
 	"extends": "tslint-config-airbnb",
 	"rules": {
+		"align": false,
 		"import-name": [false],
 		"indent": [false, "tabs"],
 		"max-line-length": [true, 160],
