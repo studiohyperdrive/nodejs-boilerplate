@@ -1,0 +1,3 @@
+{
+	"*.ts": "./server/node_modules/.bin/tslint -c ./server/tslint.json -p ./server/tsconfig.json -t stylish"
+}
