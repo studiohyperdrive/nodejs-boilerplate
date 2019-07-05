@@ -43,7 +43,7 @@ describe('[UNIT - CORE] ErrorMiddleware', () => {
 		}],
 	};
 
-	it('Should progress if there is no error', (done) => {
+	it('Should progress if there is no error', (done: jest.DoneCallback) => {
 		const req: Request = mockReq();
 		const res: Response = mockRes();
 
@@ -53,7 +53,7 @@ describe('[UNIT - CORE] ErrorMiddleware', () => {
 		});
 	});
 
-	it('Should progress if a response is already sent', (done) => {
+	it('Should progress if a response is already sent', (done: jest.DoneCallback) => {
 		const req: Request = mockReq();
 		const res: Response = mockRes();
 		res.headersSent = true;
@@ -64,7 +64,7 @@ describe('[UNIT - CORE] ErrorMiddleware', () => {
 		});
 	});
 
-	it('Should convert a string error to a CustomError and return it', (done) => {
+	it('Should convert a string error to a CustomError and return it', (done: jest.DoneCallback) => {
 		const req: Request = mockReq();
 		const res: Response = ({
 			status: (code: number) => {
@@ -86,7 +86,7 @@ describe('[UNIT - CORE] ErrorMiddleware', () => {
 		});
 	});
 
-	it('Should convert an Error object error to a CustomError and return it', (done) => {
+	it('Should convert an Error object error to a CustomError and return it', (done: jest.DoneCallback) => {
 		const req: Request = mockReq();
 		const res: Response = ({
 			status: (code: number) => {
@@ -108,7 +108,7 @@ describe('[UNIT - CORE] ErrorMiddleware', () => {
 		});
 	});
 
-	it('Should convert an ValidationError object body error to a BodyError and return it', (done) => {
+	it('Should convert an ValidationError object body error to a BodyError and return it', (done: jest.DoneCallback) => {
 		const req: Request = mockReq();
 		const res: Response = ({
 			status: (code: number) => {
@@ -132,7 +132,7 @@ describe('[UNIT - CORE] ErrorMiddleware', () => {
 		});
 	});
 
-	it('Should convert an ValidationError object headers error to a HeadersError and return it', (done) => {
+	it('Should convert an ValidationError object headers error to a HeadersError and return it', (done: jest.DoneCallback) => {
 		const req: Request = mockReq();
 		const res: Response = ({
 			status: (code: number) => {
@@ -156,7 +156,7 @@ describe('[UNIT - CORE] ErrorMiddleware', () => {
 		});
 	});
 
-	it('Should convert an ValidationError object params error to a ParamsError and return it', (done) => {
+	it('Should convert an ValidationError object params error to a ParamsError and return it', (done: jest.DoneCallback) => {
 		const req: Request = mockReq();
 		const res: Response = ({
 			status: (code: number) => {
@@ -180,7 +180,7 @@ describe('[UNIT - CORE] ErrorMiddleware', () => {
 		});
 	});
 
-	it('Should convert an ValidationError object query error to a QueryError and return it', (done) => {
+	it('Should convert an ValidationError object query error to a QueryError and return it', (done: jest.DoneCallback) => {
 		const req: Request = mockReq();
 		const res: Response = ({
 			status: (code: number) => {

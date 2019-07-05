@@ -1,7 +1,7 @@
 import { allowUnknown, stripUnknown } from './options';
 
 describe('[UNIT - SHARED] Validation - Options', () => {
-	it('Should export an instance of validation options (allowUnknown)', (done) => {
+	it('Should export an instance of validation options (allowUnknown)', (done: jest.DoneCallback) => {
 		expect(allowUnknown).toBeDefined();
 		expect(allowUnknown).toEqual({
 			allowUnknown: true,
@@ -9,7 +9,7 @@ describe('[UNIT - SHARED] Validation - Options', () => {
 		done();
 	});
 
-	it('Should export an instance of validation options (stripUnknown)', (done) => {
+	it('Should export an instance of validation options (stripUnknown)', (done: jest.DoneCallback) => {
 		expect(stripUnknown).toBeDefined();
 		expect(stripUnknown).toEqual({
 			stripUnknown: true,

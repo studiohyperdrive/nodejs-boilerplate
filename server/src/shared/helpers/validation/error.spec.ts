@@ -9,7 +9,7 @@ describe('[UNIT - SHARED] Validation - Error', () => {
 		}],
 	};
 
-	it('Should return a ValidationError', (done) => {
+	it('Should return a ValidationError', (done: jest.DoneCallback) => {
 		const err: ValidationError = new ValidationError('Validation failed', validation);
 
 		expect(err).toBeDefined();

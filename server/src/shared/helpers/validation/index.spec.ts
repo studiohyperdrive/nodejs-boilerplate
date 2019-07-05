@@ -12,7 +12,7 @@ describe('[UNIT - SHARED] Validation - Validator', () => {
 		}),
 	};
 
-	it('Should return the object if there are no errors', (done) => {
+	it('Should return the object if there are no errors', (done: jest.DoneCallback) => {
 		const result: ValidationResult<any> = Validator.validate({ key: 'value' }, preset, 'Validation failed'); // tslint:disable-line no-any
 
 		expect(result).toBeDefined();
@@ -26,7 +26,7 @@ describe('[UNIT - SHARED] Validation - Validator', () => {
 		done();
 	});
 
-	it('Should return the object if there are no errors and allow unknown properties', (done) => {
+	it('Should return the object if there are no errors and allow unknown properties', (done: jest.DoneCallback) => {
 		preset.options = allowUnknown;
 		const result: ValidationResult<any> = Validator.validate({ key: 'value', unknown: true }, preset, 'Validation failed'); // tslint:disable-line no-any
 
@@ -43,7 +43,7 @@ describe('[UNIT - SHARED] Validation - Validator', () => {
 		done();
 	});
 
-	it('Should return the object if there are no errors and strip unknown properties', (done) => {
+	it('Should return the object if there are no errors and strip unknown properties', (done: jest.DoneCallback) => {
 		preset.options = stripUnknown;
 		const result: ValidationResult<any> = Validator.validate({ key: 'value', unknown: false }, preset, 'Validation failed'); // tslint:disable-line no-any
 
@@ -58,7 +58,7 @@ describe('[UNIT - SHARED] Validation - Validator', () => {
 		done();
 	});
 
-	it('Should throw an error if there are errors', (done) => {
+	it('Should throw an error if there are errors', (done: jest.DoneCallback) => {
 		expect(() => {
 			Validator.validate({}, preset, 'Validation failed');
 		}).toThrowError('Validation failed');
