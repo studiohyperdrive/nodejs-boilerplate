@@ -1,6 +1,7 @@
 import { default as Joi, ValidationResult } from 'joi';
 
 import { allowUnknown, stripUnknown } from './options';
+import { CustomError } from '../error';
 import { ValidationPreset } from '../../shared.types';
 import { Validator } from './index';
 
@@ -58,10 +59,17 @@ describe('[UNIT - SHARED] Validation - Validator', () => {
 		done();
 	});
 
-	it('Should throw an error if there are errors', (done: jest.DoneCallback) => {
+	it('Should throw a validation error if there are errors', (done: jest.DoneCallback) => {
 		expect(() => {
 			Validator.validate({}, preset, 'Validation failed');
 		}).toThrowError('Validation failed');
+		done();
+	});
+
+	it('Should throw a custom error if there are errors and a custom error is provided', (done: jest.DoneCallback) => {
+		expect(() => {
+			Validator.validate({}, preset, new CustomError());
+		}).toThrowError('Something went wrong');
 		done();
 	});
 });
