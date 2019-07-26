@@ -8,7 +8,7 @@
 			"restart": true,
 			"protocol": "inspector",
 			"port": 5858,
-			"localRoot": "${workspaceRoot}/server",
+			"localRoot": "${workspaceFolder}/server",
 			"remoteRoot": "/app/server"
 		}
 	]
