@@ -11,7 +11,7 @@ install:
 
 script:
   - npm run lint
-  - docker run -v /coverage:/app/server/test/coverage nodejs-boilerplate-server npm run test
+  - docker run -v /coverage:/app/server/test/coverage nodejs-boilerplate-server jest --config jest.config.js --runInBand
 
 after_success:
   - codecov -f /coverage/lcov.info -t f00e25b3-f357-4c83-a4c4-c9a55950e2c2
