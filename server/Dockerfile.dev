@@ -14,6 +14,7 @@ ENV PATH /app/node_modules/.bin:$PATH
 
 # Set working directory for source code
 WORKDIR /app/server
+COPY ./ ./
 
 # Start application with live reload
 CMD ts-node-dev -r tsconfig-paths/register --transpileOnly --poll --inspect=0.0.0.0:5858 -- index.ts

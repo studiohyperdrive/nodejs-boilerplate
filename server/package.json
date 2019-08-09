@@ -11,7 +11,7 @@
     "lint": "tslint -c tslint.json -p tsconfig.json -t stylish",
     "lint:fix": "npm run lint -- --fix",
     "pretest": "npm run clean:coverage",
-    "test": "jest --config jest.config.js",
+    "test": "jest --config jest.config.js --runInBand",
     "test:watch": "npm run test -- --watchAll",
     "posttest": "npm run lint",
     "clean:build": "rm -rf ./dist",
