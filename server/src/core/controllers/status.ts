@@ -1,9 +1,9 @@
 import { ApiPath, ApiOperationGet, SwaggerDefinitionConstant } from 'swagger-express-ts';
 
-import { Request, Response } from '@shared/shared.types';
+import { IRequest, IResponse, INext } from '@shared/shared.types';
 import { version } from '@pkg';
 
-import { Status } from '../core.types';
+import { IStatus } from '../core.types';
 
 @ApiPath({
 	name: 'status',
@@ -21,10 +21,10 @@ export class StatusController {
 			},
 		},
 	})
-	public get(req: Request, res: Response): Response {
+	public get(req: IRequest, res: IResponse, next: INext): IRequest | void {
 		return res.status(200).json({
 			version,
 			success: true,
-		} as Status);
+		} as IStatus);
 	}
 }

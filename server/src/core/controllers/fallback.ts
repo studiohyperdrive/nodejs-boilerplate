@@ -1,9 +1,9 @@
+import { IRequest, IResponse, INext } from '@shared/shared.types';
 import { NotFoundError } from '@shared/helpers/error';
-import { Request, Response } from '@shared/shared.types';
 
 export class FallbackController {
 	// Get fallback
-	public get(req: Request, res: Response): Response {
-		throw new NotFoundError();
+	public get(req: IRequest, res: IResponse, next: INext): IResponse | void {
+		return next(new NotFoundError());
 	}
 }

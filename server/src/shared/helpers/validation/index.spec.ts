@@ -2,11 +2,11 @@ import { default as Joi, ValidationResult } from 'joi';
 
 import { allowUnknown, stripUnknown } from './options';
 import { CustomError } from '../error';
-import { ValidationPreset } from '../../shared.types';
+import { IValidationPreset } from '../../shared.types';
 import { Validator } from './index';
 
 describe('[UNIT - SHARED] Validation - Validator', () => {
-	const preset: ValidationPreset = {
+	const preset: IValidationPreset = {
 		options: {},
 		schema: Joi.object().required().keys({
 			key: Joi.string().required().valid(['value']),

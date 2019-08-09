@@ -4,8 +4,7 @@ import { ValidationErrorItem } from 'joi';
 
 import { default as config } from '@config';
 
-import { CustomError as ICustomError, CustomErrorDetail as ICustomErrorDetail } from '../shared.types';
-import { ValidationError } from './validation/error';
+import { ICustomError, ICustomErrorDetail, IValidationError } from '../shared.types';
 
 export class CustomError implements ICustomError {
 	public details?: ICustomErrorDetail[];
@@ -33,7 +32,7 @@ export class CustomValidationError extends CustomError {
 	public name: string = 'Bad Request';
 	public status: number = 400;
 
-	constructor(err: ValidationError) {
+	constructor(err: IValidationError) {
 		super();
 
 		this.details = pathOr([], ['validation', 'details'], err).map((detail: ValidationErrorItem) => ({
