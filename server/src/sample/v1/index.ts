@@ -5,7 +5,7 @@ import { ISwaggerModels } from '@shared/shared.types';
 import { models } from './sample.models';
 import { SampleRoutes } from './routes';
 
-export class Sample {
+export class SampleModule {
 	public static models: ISwaggerModels = models;
 
 	public static load(app: Application): void {

@@ -21,7 +21,7 @@ export class StatusController {
 			},
 		},
 	})
-	public get(req: IRequest, res: IResponse, next: INext): IRequest | void {
+	public get(req: IRequest, res: IResponse, next: INext): IResponse | void {
 		return res.status(200).json({
 			version,
 			success: true,

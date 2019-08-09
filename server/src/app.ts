@@ -11,8 +11,8 @@ import { presets as corePresets } from '@core/helpers/presets';
 import { SwaggerMiddleware } from '@core/middleware/swagger';
 import { Validator } from '@shared/helpers/validation';
 
-import { Core } from '@core';
-import { Sample } from '@sample';
+import { CoreModule } from '@core';
+import { SampleModule } from '@sample';
 
 export class App {
 	public app: Application = express();
@@ -58,19 +58,19 @@ export class App {
 		GlobalMiddleware.load(this.app);
 		if (this.config.state.docs) {
 			SwaggerMiddleware.load(this.app, {
-				...Core.models,
-				...Sample.V1.models,
+				...CoreModule.models,
+				...SampleModule.V1.models,
 			});
 		}
 	}
 
 	private loadModules(): void {
-		Core.load(this.app);
-		Sample.V1.load(this.app);
+		CoreModule.load(this.app);
+		SampleModule.V1.load(this.app);
 	}
 
 	private loadErrorHandling(): void {
-		Core.loadFallback(this.app);
+		CoreModule.loadFallback(this.app);
 		this.app.use(ErrorMiddleware.handleError);
 	}
 }
