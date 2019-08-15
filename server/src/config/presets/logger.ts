@@ -1,6 +1,6 @@
-import { LoggerConfig } from '../config.types';
+import { ILoggerConfig } from '../config.types';
 
-const presets: { [key: string]: LoggerConfig } = {
+const presets: { [key: string]: ILoggerConfig } = {
 	verbose: {
 		enabled: [
 			'debug',
@@ -28,6 +28,11 @@ const presets: { [key: string]: LoggerConfig } = {
 			'error',
 			'cron',
 			'db',
+		],
+	},
+	error: {
+		enabled: [
+			'error',
 		],
 	},
 };

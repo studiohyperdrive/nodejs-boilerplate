@@ -1,9 +1,11 @@
+import { propOr } from 'ramda';
+
 import { CustomError, BodyError, HeadersError, ParamsError, QueryError } from '@shared/helpers/error';
-import { Request, Response, Next } from '@shared/shared.types';
+import { IRequest, IResponse, INext, ICustomError } from '@shared/shared.types';
 import { ValidationError } from '@shared/helpers/validation/error';
 
 export class ErrorMiddleware {
-	public static handleError(err: string | Error | CustomError | null | undefined, req: Request, res: Response, next: Next): Response | void {
+	public static handleError(err: string | Error | ICustomError | null | undefined, req: IRequest, res: IResponse, next: INext): IResponse | void {
 		// Check if there is an error
 		if (!err) {
 			return next();
@@ -42,15 +44,15 @@ export class ErrorMiddleware {
 			err = new CustomError(err); // tslint:disable-line no-parameter-reassignment
 		}
 
-		return res.status((err as CustomError).status).json({
-			host: (err as CustomError).host,
-			identifier: (err as CustomError).identifier,
-			timestamp: (err as CustomError).timestamp,
-			status: (err as CustomError).status,
-			name: (err as CustomError).name,
-			message: (err as CustomError).message,
-			details: (err as CustomError).details, // Optional
-			stack: ((err as CustomError).stack || '').split(/\r?\n/), // Optional and only on local or test environment
+		return res.status((err as ICustomError).status).json({
+			host: (err as ICustomError).host,
+			identifier: (err as ICustomError).identifier,
+			timestamp: (err as ICustomError).timestamp,
+			status: (err as ICustomError).status,
+			name: (err as ICustomError).name,
+			message: (err as ICustomError).message,
+			details: (err as ICustomError).details, // Optional
+			stack: (propOr('', 'stack', err as ICustomError) as string).split(/\r?\n/), // Optional and only on local or test environment
 		});
 	}
 }

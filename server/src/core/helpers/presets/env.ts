@@ -1,9 +1,9 @@
 import { default as Joi } from 'joi';
 
 import { allowUnknown } from '@shared/helpers/validation/options';
-import { ValidationPreset } from '@shared/shared.types';
+import { IValidationPreset } from '@shared/shared.types';
 
-export const envPreset: ValidationPreset = {
+export const env: IValidationPreset = {
 	options: allowUnknown,
 	schema: Joi.object().required().keys({
 		NODE_ENV: Joi.string().required().valid([

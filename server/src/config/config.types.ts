@@ -1,24 +1,24 @@
 import { NodejsOptions } from '@studiohyperdrive/logger';
 
-export type Envs = 'local' | 'test' | 'development' | 'staging' | 'production';
-export type LoggerConfig = NodejsOptions;
-export type LoggerPresets = 'default' | 'verbose' | 'silent';
+export type IEnvs = 'local' | 'test' | 'development' | 'staging' | 'production';
+export type ILoggerConfig = NodejsOptions;
+export type ILoggerPresets = 'default' | 'verbose' | 'silent';
 
-export interface StateConfig {
-	env: Envs;
+export interface IStateConfig {
+	env: IEnvs;
 	docs: boolean;
 	production: boolean;
 	test: boolean;
 }
 
-export interface ServerConfig {
+export interface IServerConfig {
 	host: string;
 	port: number;
 	timezone: string;
 }
 
-export interface Config {
-	state: StateConfig;
-	server: ServerConfig;
-	logger: LoggerConfig;
+export interface IConfig {
+	state: IStateConfig;
+	server: IServerConfig;
+	logger: ILoggerConfig;
 }

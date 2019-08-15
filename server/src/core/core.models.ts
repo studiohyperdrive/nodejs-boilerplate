@@ -1,8 +1,8 @@
 import { SwaggerDefinitionConstant } from 'swagger-express-ts';
 
-import { SwaggerModels } from '@shared/shared.types';
+import { ISwaggerModels } from '@shared/shared.types';
 
-export const models: SwaggerModels = {
+export const models: ISwaggerModels = {
 	Error: {
 		description: 'Error',
 		properties: {

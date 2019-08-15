@@ -1,38 +1,11 @@
 import { mockReq, mockRes } from 'sinon-express-mock';
 
-import { CustomError, BodyError, HeadersError, ParamsError, QueryError } from '@shared/helpers/error';
-import { default as config } from '@config';
-import { Request, Response, CustomErrorDetail } from '@shared/shared.types';
+import { CustomError } from '@shared/helpers/error';
+import { IRequest, IResponse, ICustomError, IBodyError, IHeadersError, IParamsError, IQueryError } from '@shared/shared.types';
+import { validateErrorBody } from '@test/helpers/error';
 import { ValidationError } from '@shared/helpers/validation/error';
 
 import { ErrorMiddleware } from './error';
-
-const validateBody = (body: any, status: number, name: string, message: string, details?: CustomErrorDetail[]): void => { // tslint:disable-line no-any
-	expect(body).toBeObject();
-	expect(body).toContainAllKeys([
-		'host',
-		'identifier',
-		'timestamp',
-		'status',
-		'name',
-		'message',
-		'details',
-		'stack',
-	]);
-	expect(body.host).toEqual(config.server.host);
-	expect(body.identifier).toBeString();
-	expect(body.timestamp).toBeString();
-	expect(body.status).toEqual(status);
-	expect(body.name).toEqual(name);
-	expect(body.message).toEqual(message);
-	expect(body.stack).toBeArray();
-
-	if (details) {
-		expect(body.details).toEqual(details);
-	} else {
-		expect(body.details).toBeUndefined();
-	}
-};
 
 describe('[UNIT - CORE] ErrorMiddleware', () => {
 	const validation: any = { // tslint:disable-line no-any
@@ -44,8 +17,8 @@ describe('[UNIT - CORE] ErrorMiddleware', () => {
 	};
 
 	it('Should progress if there is no error', (done: jest.DoneCallback) => {
-		const req: Request = mockReq();
-		const res: Response = mockRes();
+		const req: IRequest = mockReq();
+		const res: IResponse = mockRes();
 
 		ErrorMiddleware.handleError(null, req, res, (err: Error) => {
 			expect(err).toBeUndefined();
@@ -54,8 +27,8 @@ describe('[UNIT - CORE] ErrorMiddleware', () => {
 	});
 
 	it('Should progress if a response is already sent', (done: jest.DoneCallback) => {
-		const req: Request = mockReq();
-		const res: Response = mockRes();
+		const req: IRequest = mockReq();
+		const res: IResponse = mockRes();
 		res.headersSent = true;
 
 		ErrorMiddleware.handleError(new CustomError(), req, res, (err: Error) => {
@@ -65,20 +38,20 @@ describe('[UNIT - CORE] ErrorMiddleware', () => {
 	});
 
 	it('Should convert a string error to a CustomError and return it', (done: jest.DoneCallback) => {
-		const req: Request = mockReq();
-		const res: Response = ({
+		const req: IRequest = mockReq();
+		const res: IResponse = ({
 			status: (code: number) => {
 				expect(code).toBeNumber();
 				expect(code).toEqual(500);
 
 				return {
-					json: (body: CustomError) => {
-						validateBody(body, 500, 'Error', 'error');
+					json: (body: ICustomError) => {
+						validateErrorBody(body, 500, 'Error', 'error');
 						done();
 					},
 				};
 			},
-		}) as Response;
+		}) as IResponse;
 
 		ErrorMiddleware.handleError('error', req, res, (err: Error) => {
 			expect(err).toBeUndefined();
@@ -87,20 +60,20 @@ describe('[UNIT - CORE] ErrorMiddleware', () => {
 	});
 
 	it('Should convert an Error object error to a CustomError and return it', (done: jest.DoneCallback) => {
-		const req: Request = mockReq();
-		const res: Response = ({
+		const req: IRequest = mockReq();
+		const res: IResponse = ({
 			status: (code: number) => {
 				expect(code).toBeNumber();
 				expect(code).toEqual(500);
 
 				return {
-					json: (body: CustomError) => {
-						validateBody(body, 500, 'Error', 'error');
+					json: (body: ICustomError) => {
+						validateErrorBody(body, 500, 'Error', 'error');
 						done();
 					},
 				};
 			},
-		}) as Response;
+		}) as IResponse;
 
 		ErrorMiddleware.handleError(new Error('error'), req, res, (err: Error) => {
 			expect(err).toBeUndefined();
@@ -109,22 +82,22 @@ describe('[UNIT - CORE] ErrorMiddleware', () => {
 	});
 
 	it('Should convert an ValidationError object body error to a BodyError and return it', (done: jest.DoneCallback) => {
-		const req: Request = mockReq();
-		const res: Response = ({
+		const req: IRequest = mockReq();
+		const res: IResponse = ({
 			status: (code: number) => {
 				expect(code).toBeNumber();
 				expect(code).toEqual(400);
 
 				return {
-					json: (body: BodyError) => {
-						validateBody(body, 400, 'Bad Request', 'Invalid body', [{
+					json: (body: IBodyError) => {
+						validateErrorBody(body, 400, 'Bad Request', 'Invalid body', [{
 							err: 'message',
 						}]);
 						done();
 					},
 				};
 			},
-		}) as Response;
+		}) as IResponse;
 
 		ErrorMiddleware.handleError(new ValidationError('body', validation), req, res, (err: Error) => {
 			expect(err).toBeUndefined();
@@ -133,22 +106,22 @@ describe('[UNIT - CORE] ErrorMiddleware', () => {
 	});
 
 	it('Should convert an ValidationError object headers error to a HeadersError and return it', (done: jest.DoneCallback) => {
-		const req: Request = mockReq();
-		const res: Response = ({
+		const req: IRequest = mockReq();
+		const res: IResponse = ({
 			status: (code: number) => {
 				expect(code).toBeNumber();
 				expect(code).toEqual(400);
 
 				return {
-					json: (body: HeadersError) => {
-						validateBody(body, 400, 'Bad Request', 'Invalid headers', [{
+					json: (body: IHeadersError) => {
+						validateErrorBody(body, 400, 'Bad Request', 'Invalid headers', [{
 							err: 'message',
 						}]);
 						done();
 					},
 				};
 			},
-		}) as Response;
+		}) as IResponse;
 
 		ErrorMiddleware.handleError(new ValidationError('headers', validation), req, res, (err: Error) => {
 			expect(err).toBeUndefined();
@@ -157,22 +130,22 @@ describe('[UNIT - CORE] ErrorMiddleware', () => {
 	});
 
 	it('Should convert an ValidationError object params error to a ParamsError and return it', (done: jest.DoneCallback) => {
-		const req: Request = mockReq();
-		const res: Response = ({
+		const req: IRequest = mockReq();
+		const res: IResponse = ({
 			status: (code: number) => {
 				expect(code).toBeNumber();
 				expect(code).toEqual(400);
 
 				return {
-					json: (body: ParamsError) => {
-						validateBody(body, 400, 'Bad Request', 'Invalid params', [{
+					json: (body: IParamsError) => {
+						validateErrorBody(body, 400, 'Bad Request', 'Invalid params', [{
 							err: 'message',
 						}]);
 						done();
 					},
 				};
 			},
-		}) as Response;
+		}) as IResponse;
 
 		ErrorMiddleware.handleError(new ValidationError('params', validation), req, res, (err: Error) => {
 			expect(err).toBeUndefined();
@@ -181,22 +154,22 @@ describe('[UNIT - CORE] ErrorMiddleware', () => {
 	});
 
 	it('Should convert an ValidationError object query error to a QueryError and return it', (done: jest.DoneCallback) => {
-		const req: Request = mockReq();
-		const res: Response = ({
+		const req: IRequest = mockReq();
+		const res: IResponse = ({
 			status: (code: number) => {
 				expect(code).toBeNumber();
 				expect(code).toEqual(400);
 
 				return {
-					json: (body: QueryError) => {
-						validateBody(body, 400, 'Bad Request', 'Invalid query', [{
+					json: (body: IQueryError) => {
+						validateErrorBody(body, 400, 'Bad Request', 'Invalid query', [{
 							err: 'message',
 						}]);
 						done();
 					},
 				};
 			},
-		}) as Response;
+		}) as IResponse;
 
 		ErrorMiddleware.handleError(new ValidationError('query', validation), req, res, (err: Error) => {
 			expect(err).toBeUndefined();

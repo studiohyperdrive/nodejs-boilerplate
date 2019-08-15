@@ -1,11 +1,11 @@
 // Requests
 import {
-	Request as ExpressRequest,
-	Response as ExpressResponse,
-	NextFunction as ExpressNextFunction,
+	Request,
+	Response,
+	NextFunction,
 } from 'express';
 
-export interface Request extends ExpressRequest {
+export interface IRequest extends Request {
 	data?: {
 		/* tslint:disable no-any */
 		body: any;
@@ -15,28 +15,34 @@ export interface Request extends ExpressRequest {
 		/* tslint:enable no-any */
 	};
 }
-export type Response = ExpressResponse;
-export type Next = ExpressNextFunction;
+export type IResponse = Response;
+export type INext = NextFunction;
 
 // Validation
 import {
-	Schema as JoiSchema,
-	ValidationOptions as JoiValidationOptions,
+	Schema,
+	ValidationOptions,
 } from 'joi';
+import { ValidationError } from './helpers/validation/error';
 
-export interface ValidationPreset {
-	schema: JoiSchema;
-	options: JoiValidationOptions;
+export interface IValidationPreset {
+	schema: Schema;
+	options: ValidationOptions;
 }
-export type ValidationOrigin = 'body' | 'headers' | 'params' | 'query';
+export type IValidationOrigin = 'body' | 'headers' | 'params' | 'query';
+export type IValidationError = ValidationError;
 
 // Error handling
-export interface CustomErrorDetail {
+import { CustomValidationError } from './helpers/error';
+
+export type ICustomValidationError = CustomValidationError;
+
+export interface ICustomErrorDetail {
 	err: string;
 }
 
-export interface CustomError extends Error {
-	details?: CustomErrorDetail[];
+export interface ICustomError extends Error {
+	details?: ICustomErrorDetail[];
 	host: string;
 	identifier: string;
 	message: string;
@@ -45,30 +51,30 @@ export interface CustomError extends Error {
 	status: number;
 	timestamp: string;
 }
-export type BodyError = CustomError;
-export type HeadersError = CustomError;
-export type ParamsError = CustomError;
-export type QueryError = CustomError;
-export type UnauthorizedError = CustomError;
-export type ForbiddenError = CustomError;
-export type NotFoundError = CustomError;
-export type ConflictError = CustomError;
-export type InternalServerError = CustomError;
-export type Errors =
-	CustomError |
-	BodyError |
-	HeadersError |
-	ParamsError |
-	QueryError |
-	UnauthorizedError |
-	ForbiddenError |
-	NotFoundError |
-	ConflictError |
-	InternalServerError;
+export type IBodyError = ICustomError;
+export type IHeadersError = ICustomError;
+export type IParamsError = ICustomError;
+export type IQueryError = ICustomError;
+export type IUnauthorizedError = ICustomError;
+export type IForbiddenError = ICustomError;
+export type INotFoundError = ICustomError;
+export type IConflictError = ICustomError;
+export type IInternalServerError = ICustomError;
+export type IErrors =
+	ICustomError |
+	IBodyError |
+	IHeadersError |
+	IParamsError |
+	IQueryError |
+	IUnauthorizedError |
+	IForbiddenError |
+	INotFoundError |
+	IConflictError |
+	IInternalServerError;
 
 // Swagger
 import { ISwaggerBuildDefinitionModel } from 'swagger-express-ts/swagger.builder';
 
-export interface SwaggerModels {
+export interface ISwaggerModels {
 	[key: string]: ISwaggerBuildDefinitionModel;
 }
