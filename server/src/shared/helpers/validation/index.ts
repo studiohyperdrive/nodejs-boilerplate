@@ -1,14 +1,13 @@
 import { curry } from 'ramda';
 import { default as Joi, ValidationResult } from 'joi';
 
-import { CustomError } from '../error';
+import { ICustomError, IValidationPreset } from '../../shared.types';
 import { ValidationError } from './error';
-import { ValidationPreset } from '../../shared.types';
 
 export class Validator {
 	public static validate = curry(Validator.runValidation);
 
-	private static runValidation(obj: any, preset: ValidationPreset, err: string | CustomError): any { // tslint:disable-line no-any
+	private static runValidation(obj: any, preset: IValidationPreset, err: string | ICustomError): any { // tslint:disable-line no-any
 		const validation: ValidationResult<any> = Joi.validate(obj, preset.schema, { abortEarly: false, ...preset.options }); // tslint:disable-line no-any
 
 		if (!validation.error) {

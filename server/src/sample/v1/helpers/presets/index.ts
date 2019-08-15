@@ -1,7 +1,7 @@
-import { ValidationPreset } from '@shared/shared.types';
+import { IValidationPreset } from '@shared/shared.types';
 
-import { samplePreset } from './sample';
+import { sample } from './sample';
 
-export const presets: { [key: string]: ValidationPreset } = {
-	sample: samplePreset,
+export const presets: { [key: string]: IValidationPreset } = {
+	sample,
 };

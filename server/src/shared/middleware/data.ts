@@ -1,13 +1,13 @@
 import { clone, curry } from 'ramda';
 
-import { Request, Response, Next, ValidationOrigin, ValidationPreset } from '../shared.types';
+import { IRequest, IResponse, INext, IValidationOrigin, IValidationPreset } from '../shared.types';
 import { ValidationError } from '../helpers/validation/error';
 import { Validator } from '../helpers/validation';
 
 export class DataMiddleware {
 	public static validate = curry(DataMiddleware.runValidation);
 
-	public static copy(req: Request, res: Response, next: Next): void {
+	public static copy(req: IRequest, res: IResponse, next: INext): void {
 		req.data = {
 			body: clone(req.body),
 			headers: clone(req.headers),
@@ -17,7 +17,7 @@ export class DataMiddleware {
 		next();
 	}
 
-	private static runValidation(origin: ValidationOrigin, preset: ValidationPreset, req: Request, res: Response, next: Next): void {
+	private static runValidation(origin: IValidationOrigin, preset: IValidationPreset, req: IRequest, res: IResponse, next: INext): void {
 		if (!req.data) {
 			throw new ValidationError('The request data has not been cloned');
 		}

@@ -1,9 +1,9 @@
 import { ApiPath, ApiOperationGet, ApiOperationPost, SwaggerDefinitionConstant } from 'swagger-express-ts';
 
+import { IRequest, IResponse, INext } from '@shared/shared.types';
 import { NotFoundError, ConflictError } from '@shared/helpers/error';
-import { Request, Response } from '@shared/shared.types';
 
-import { Sample } from '../sample.types';
+import { ISample } from '../sample.types';
 
 @ApiPath({
 	name: 'Sample',
@@ -26,10 +26,10 @@ export class SampleController {
 			},
 		},
 	})
-	public getAll(req: Request, res: Response): Response {
+	public getAll(req: IRequest, res: IResponse, next: INext): IResponse | void {
 		return res.status(200).json([{
 			id: 1,
-		}] as Sample[]);
+		}] as ISample[]);
 	}
 
 	@ApiOperationGet({
@@ -58,14 +58,14 @@ export class SampleController {
 			},
 		},
 	})
-	public getById(req: Request, res: Response): Response {
+	public getById(req: IRequest, res: IResponse, next: INext): IResponse | void {
 		if (req.data.params.id !== 1) {
-			throw new NotFoundError();
+			return next(new NotFoundError());
 		}
 
 		return res.status(200).json({
 			id: req.data.params.id,
-		} as Sample);
+		} as ISample);
 	}
 
 	@ApiOperationPost({
@@ -97,13 +97,13 @@ export class SampleController {
 			},
 		},
 	})
-	public create(req: Request, res: Response): Response {
+	public create(req: IRequest, res: IResponse, next: INext): IResponse | void {
 		if (req.data.body.id === 1) {
-			throw new ConflictError();
+			return next(new ConflictError());
 		}
 
 		return res.status(201).json({
 			id: req.data.body.id,
-		} as Sample);
+		} as ISample);
 	}
 }

@@ -1,6 +1,6 @@
-import { Config, LoggerPresets } from './config.types';
 import { default as loggerPresets } from './presets/logger';
 import { EnvHelper } from './helpers/env';
+import { IConfig, ILoggerPresets } from './config.types';
 
 export default {
 	state: {
@@ -14,5 +14,5 @@ export default {
 		port: EnvHelper.envToNumber(process.env.PORT),
 		timezone: process.env.TZ,
 	},
-	logger: loggerPresets[process.env['LOGGING_PRESET'] as LoggerPresets],
-} as Config;
+	logger: loggerPresets[process.env['LOGGING_PRESET'] as ILoggerPresets],
+} as IConfig;

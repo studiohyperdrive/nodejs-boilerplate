@@ -1,7 +1,7 @@
-import { ValidationPreset } from '@shared/shared.types';
+import { IValidationPreset } from '@shared/shared.types';
 
-import { envPreset } from './env';
+import { env } from './env';
 
-export const presets: { [key: string]: ValidationPreset } = {
-	env: envPreset,
+export const presets: { [key: string]: IValidationPreset } = {
+	env,
 };

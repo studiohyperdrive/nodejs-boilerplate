@@ -1,9 +1,9 @@
 import { default as Joi } from 'joi';
 
 import { allowUnknown } from '@shared/helpers/validation/options';
-import { ValidationPreset } from '@shared/shared.types';
+import { IValidationPreset } from '@shared/shared.types';
 
-export const samplePreset: ValidationPreset = {
+export const sample: IValidationPreset = {
 	options: allowUnknown,
 	schema: Joi.object().required().keys({
 		id: Joi.number().required(),

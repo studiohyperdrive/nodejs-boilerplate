@@ -1,14 +1,13 @@
 import { default as Joi } from 'joi';
 import { mockReq, mockRes } from 'sinon-express-mock';
 
-import { Request, Response, Next, ValidationPreset } from '../shared.types';
 import { DataMiddleware } from './data';
-import { ValidationError } from '../helpers/validation/error';
+import { IRequest, IResponse, INext, IValidationError, IValidationPreset } from '../shared.types';
 
 describe('[UNIT - SHARED] DataMiddleware', () => {
 	describe('Copy' , () => {
 		it('Should copy all request data to req.data', (done: jest.DoneCallback) => {
-			const req: Request = mockReq({
+			const req: IRequest = mockReq({
 				body: {
 					key: 'body',
 				},
@@ -22,7 +21,7 @@ describe('[UNIT - SHARED] DataMiddleware', () => {
 					key: 'query',
 				},
 			});
-			const res: Response = mockRes();
+			const res: IResponse = mockRes();
 
 			DataMiddleware.copy(req, res, () => {
 				expect(req.data).toBeDefined();
@@ -53,7 +52,7 @@ describe('[UNIT - SHARED] DataMiddleware', () => {
 	});
 
 	describe('Validate', () => {
-		const preset: ValidationPreset = {
+		const preset: IValidationPreset = {
 			options: {},
 			schema: Joi.object().required().keys({
 				key: Joi.string().required().valid(['value']),
@@ -61,16 +60,16 @@ describe('[UNIT - SHARED] DataMiddleware', () => {
 		};
 
 		it('Should progress if there are no errors', (done: jest.DoneCallback) => {
-			const req: Request = mockReq({
+			const req: IRequest = mockReq({
 				data: {
 					body: {
 						key: 'value',
 					},
 				},
 			});
-			const res: Response = mockRes();
+			const res: IResponse = mockRes();
 
-			DataMiddleware.validate('body', preset, req, res, (err: ValidationError) => {
+			DataMiddleware.validate('body', preset, req, res, (err: IValidationError) => {
 				expect(err).toBeUndefined();
 				expect(req.data.body).toBeDefined();
 				expect(req.data.body).toBeObject();
@@ -85,15 +84,15 @@ describe('[UNIT - SHARED] DataMiddleware', () => {
 		});
 
 		it('Should throw an error if there are errors', (done: jest.DoneCallback) => {
-			const req: Request = mockReq({
+			const req: IRequest = mockReq({
 				data: {
 					body: {
 						key: 'invalid',
 					},
 				},
 			});
-			const res: Response = mockRes();
-			const next: Next = () => {};
+			const res: IResponse = mockRes();
+			const next: INext = () => {};
 
 			expect(() => {
 				DataMiddleware.validate('body', preset, req, res, next);
@@ -102,9 +101,9 @@ describe('[UNIT - SHARED] DataMiddleware', () => {
 		});
 
 		it('Should throw an error if there if the data hasn\'t been cloned to req.data', (done: jest.DoneCallback) => {
-			const req: Request = mockReq();
-			const res: Response = mockRes();
-			const next: Next = () => {};
+			const req: IRequest = mockReq();
+			const res: IResponse = mockRes();
+			const next: INext = () => {};
 
 			expect(() => {
 				DataMiddleware.validate('body', preset, req, res, next);
