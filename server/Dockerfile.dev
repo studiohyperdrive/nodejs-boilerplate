@@ -9,7 +9,7 @@ RUN npm i --global --silent npm@latest
 # Install dependencies
 WORKDIR /app
 COPY package*.json .npmrc ./
-RUN npm i
+RUN npm i --silent
 ENV PATH /app/node_modules/.bin:$PATH
 
 # Set working directory for source code
