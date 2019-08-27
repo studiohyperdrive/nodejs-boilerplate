@@ -3,16 +3,16 @@ import { default as express, Application } from 'express';
 import { Server } from 'http';
 
 import { default as config } from '@config';
-import { ErrorMiddleware } from '@core/middleware/error';
-import { GlobalMiddleware } from '@core/middleware/global';
+import { ErrorMiddleware } from '@modules/core/middleware/error';
+import { GlobalMiddleware } from '@modules/core/middleware/global';
 import { IConfig } from '@config/config.types';
 import { logger } from '@shared/helpers/logger';
-import { presets as corePresets } from '@core/helpers/presets';
-import { SwaggerMiddleware } from '@core/middleware/swagger';
+import { presets as corePresets } from '@modules/core/helpers/presets';
+import { SwaggerMiddleware } from '@modules/core/middleware/swagger';
 import { Validator } from '@shared/helpers/validation';
 
-import { CoreModule } from '@core';
-import { SampleModule } from '@sample';
+import { CoreModule } from '@modules/core';
+import { SampleModule } from '@modules/sample';
 
 export class App {
 	public app: Application = express();
