@@ -22,7 +22,7 @@ export type INext = NextFunction;
 import {
 	Schema,
 	ValidationOptions,
-} from 'joi';
+} from '@hapi/joi';
 import { ValidationError } from './helpers/validation/error';
 
 export interface IValidationPreset {

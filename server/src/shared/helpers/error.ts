@@ -1,6 +1,6 @@
 import { default as uuid } from 'uuid';
 import { pathOr } from 'ramda';
-import { ValidationErrorItem } from 'joi';
+import { ValidationErrorItem } from '@hapi/joi';
 
 import { default as config } from '~config';
 
@@ -22,6 +22,7 @@ export class CustomError implements ICustomError {
 		if (err) {
 			this.message = err.message;
 			this.name = err.name;
+			/* istanbul ignore next */
 			this.stack = config.state.env === 'local' || config.state.env === 'test' ? err.stack : undefined;
 		}
 	}

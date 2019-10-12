@@ -1,4 +1,4 @@
-import { default as Joi } from 'joi';
+import { default as Joi } from '@hapi/joi';
 
 import { allowUnknown } from '~shared/helpers/validation/options';
 import { IValidationPreset } from '~shared/shared.types';

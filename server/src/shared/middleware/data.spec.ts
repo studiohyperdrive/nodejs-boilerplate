@@ -1,4 +1,4 @@
-import { default as Joi } from 'joi';
+import { default as Joi } from '@hapi/joi';
 import { mockReq, mockRes } from 'sinon-express-mock';
 
 import { DataMiddleware } from './data';
@@ -55,7 +55,7 @@ describe('[UNIT - SHARED] DataMiddleware', () => {
 		const preset: IValidationPreset = {
 			options: {},
 			schema: Joi.object().required().keys({
-				key: Joi.string().required().valid(['value']),
+				key: Joi.string().required().valid('value'),
 			}),
 		};
 

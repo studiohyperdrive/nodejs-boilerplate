@@ -2,7 +2,7 @@ import { NodejsOptions } from '@studiohyperdrive/logger';
 
 export type IEnvs = 'local' | 'test' | 'development' | 'staging' | 'production';
 export type ILoggerConfig = NodejsOptions;
-export type ILoggerPresets = 'default' | 'verbose' | 'silent';
+export type ILoggerPresets = 'default' | 'verbose' | 'silent' | 'error';
 
 export interface IStateConfig {
 	env: IEnvs;

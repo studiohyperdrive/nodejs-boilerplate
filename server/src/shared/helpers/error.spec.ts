@@ -1,4 +1,4 @@
-import { ValidationError as JoiValidationError } from 'joi';
+import { ValidationError as JoiValidationError } from '@hapi/joi';
 
 import { validateError } from '~test/helpers/error';
 
