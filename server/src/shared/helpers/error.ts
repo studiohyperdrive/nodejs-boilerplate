@@ -2,7 +2,7 @@ import { default as uuid } from 'uuid';
 import { pathOr } from 'ramda';
 import { ValidationErrorItem } from 'joi';
 
-import { default as config } from '@config';
+import { default as config } from '~config';
 
 import { ICustomError, ICustomErrorDetail, IValidationError } from '../shared.types';
 

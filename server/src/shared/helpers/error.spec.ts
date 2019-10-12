@@ -1,6 +1,6 @@
 import { ValidationError as JoiValidationError } from 'joi';
 
-import { validateError } from '@test/helpers/error';
+import { validateError } from '~test/helpers/error';
 
 import {
 	CustomError,

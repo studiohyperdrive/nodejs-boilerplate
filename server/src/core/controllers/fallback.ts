@@ -1,5 +1,5 @@
-import { IRequest, IResponse, INext } from '@shared/shared.types';
-import { NotFoundError } from '@shared/helpers/error';
+import { IRequest, IResponse, INext } from '~shared/shared.types';
+import { NotFoundError } from '~shared/helpers/error';
 
 export class FallbackController {
 	// Get fallback

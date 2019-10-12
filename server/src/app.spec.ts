@@ -1,5 +1,5 @@
-import { logger } from '@shared/helpers/logger';
-import { wait } from '@test/helpers/wait';
+import { logger } from '~shared/helpers/logger';
+import { wait } from '~test/helpers/wait';
 
 import { App } from './app';
 

@@ -1,7 +1,7 @@
 import { ApiPath, ApiOperationGet, SwaggerDefinitionConstant } from 'swagger-express-ts';
 
-import { IRequest, IResponse, INext } from '@shared/shared.types';
-import { version } from '@pkg';
+import { IRequest, IResponse, INext } from '~shared/shared.types';
+import { version } from '~pkg';
 
 import { IStatus } from '../core.types';
 

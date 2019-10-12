@@ -1,6 +1,6 @@
 import { Application } from 'express';
 
-import { ISwaggerModels } from '@shared/shared.types';
+import { ISwaggerModels } from '~shared/shared.types';
 
 import { CoreRoutes } from './routes';
 import { models } from './core.models';
