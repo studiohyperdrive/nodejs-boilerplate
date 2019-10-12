@@ -2,8 +2,8 @@ import { Application } from 'express';
 
 import { ISwaggerModels } from '~shared/shared.types';
 
-import { models } from './sample.models';
 import { SampleRoutes } from './routes';
+import { models } from './sample.models';
 
 export class SampleModule {
 	public static models: ISwaggerModels = models;

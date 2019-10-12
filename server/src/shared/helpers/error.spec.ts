@@ -3,31 +3,31 @@ import { ValidationError as JoiValidationError } from '@hapi/joi';
 import { validateError } from '~test/helpers/error';
 
 import {
-	CustomError,
-	CustomValidationError,
-	BodyError,
-	HeadersError,
-	ParamsError,
-	QueryError,
-	UnauthorizedError,
-	ForbiddenError,
-	NotFoundError,
-	ConflictError,
-	InternalServerError,
-} from './error';
-import {
+	IBodyError,
+	IConflictError,
 	ICustomError,
 	ICustomValidationError,
-	IBodyError,
+	IForbiddenError,
 	IHeadersError,
+	IInternalServerError,
+	INotFoundError,
 	IParamsError,
 	IQueryError,
 	IUnauthorizedError,
-	IForbiddenError,
-	INotFoundError,
-	IConflictError,
-	IInternalServerError,
 } from '../shared.types';
+import {
+	BodyError,
+	ConflictError,
+	CustomError,
+	CustomValidationError,
+	ForbiddenError,
+	HeadersError,
+	InternalServerError,
+	NotFoundError,
+	ParamsError,
+	QueryError,
+	UnauthorizedError,
+} from './error';
 import { ValidationError } from './validation/error';
 
 describe('[UNIT - SHARED] Errors', () => {

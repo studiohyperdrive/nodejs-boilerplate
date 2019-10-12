@@ -1,5 +1,5 @@
-import { curry } from 'ramda';
 import { default as Joi, ValidationResult } from '@hapi/joi';
+import { curry } from 'ramda';
 
 import { ICustomError, IValidationPreset } from '../../shared.types';
 import { ValidationError } from './error';

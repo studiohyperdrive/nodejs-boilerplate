@@ -1,6 +1,6 @@
-import { default as loggerPresets } from './presets/logger';
-import { EnvHelper } from './helpers/env';
 import { IConfig, ILoggerPresets } from './config.types';
+import { EnvHelper } from './helpers/env';
+import { default as loggerPresets } from './presets/logger';
 
 export default {
 	state: {
