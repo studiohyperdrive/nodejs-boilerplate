@@ -48,4 +48,5 @@ module.exports = {
 	setupFilesAfterEnv: [
 		'jest-extended',
 	],
+	forceExit: true,
 };
