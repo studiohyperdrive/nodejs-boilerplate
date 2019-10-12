@@ -29,6 +29,7 @@ export interface IValidationPreset {
 	schema: Schema;
 	options: ValidationOptions;
 }
+export type IValidationPresetFn = (_: any) => IValidationPreset; // tslint:disable-line no-any
 export type IValidationOrigin = 'body' | 'headers' | 'params' | 'query';
 export type IValidationError = ValidationError;
 
