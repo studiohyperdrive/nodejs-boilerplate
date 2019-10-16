@@ -4,7 +4,7 @@ import { App } from '~app';
 
 import { validateErrorBody } from '../../helpers/error';
 
-const api = supertest(new App(false).app);
+const api = supertest(new App().app);
 
 describe('[INTEGRATION - SAMPLE] Samples route', () => {
 	describe('Get all samples', () => {
