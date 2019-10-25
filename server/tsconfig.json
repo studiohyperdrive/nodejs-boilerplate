@@ -46,7 +46,12 @@
 		}
 	},
 	"include": [
-		"**/*.ts"
+		"index.ts",
+		"src/**/*.ts",
+		"src/**/*.spec.ts",
+		"test/index.ts",
+		"test/**/*.ts",
+		"test/**/*.spec.ts"
 	],
 	"exclude": [
 		"**/coverage/**",

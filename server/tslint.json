@@ -7,6 +7,7 @@
 		"max-line-length": [true, 160],
 		"no-any": [true],
 		"no-console": [true],
+		"no-increment-decrement": [false],
 		"ter-indent": [false, "tab"],
 		"trailing-comma": [
 			true,

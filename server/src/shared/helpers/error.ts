@@ -1,8 +1,9 @@
 import { default as uuid } from 'uuid';
 import { pathOr } from 'ramda';
-import { ValidationErrorItem } from 'joi';
+import { ValidationErrorItem } from '@hapi/joi';
 
 import { default as config } from '~config';
+import { Envs } from '~config/config.types';
 
 import { ICustomError, ICustomErrorDetail, IValidationError } from '../shared.types';
 
@@ -22,7 +23,8 @@ export class CustomError implements ICustomError {
 		if (err) {
 			this.message = err.message;
 			this.name = err.name;
-			this.stack = config.state.env === 'local' || config.state.env === 'test' ? err.stack : undefined;
+			/* istanbul ignore next */
+			this.stack = [Envs.local, Envs.test].includes(config.state.env) ? err.stack : undefined;
 		}
 	}
 }
