@@ -1,11 +1,24 @@
 import { NodejsOptions } from '@studiohyperdrive/logger';
 
-export type IEnvs = 'local' | 'test' | 'development' | 'staging' | 'production';
 export type ILoggerConfig = NodejsOptions;
-export type ILoggerPresets = 'default' | 'verbose' | 'silent' | 'error';
+
+export enum Envs {
+	local = 'local',
+	test = 'test',
+	development = 'development',
+	staging = 'staging',
+	production = 'production',
+}
+
+export enum LoggerPresets {
+	default = 'default',
+	verbose = 'verbose',
+	silent = 'silent',
+	error = 'error',
+}
 
 export interface IStateConfig {
-	env: IEnvs;
+	env: Envs;
 	docs: boolean;
 	production: boolean;
 	test: boolean;

@@ -3,6 +3,7 @@ import { pathOr } from 'ramda';
 import { ValidationErrorItem } from '@hapi/joi';
 
 import { default as config } from '~config';
+import { Envs } from '~config/config.types';
 
 import { ICustomError, ICustomErrorDetail, IValidationError } from '../shared.types';
 
@@ -23,7 +24,7 @@ export class CustomError implements ICustomError {
 			this.message = err.message;
 			this.name = err.name;
 			/* istanbul ignore next */
-			this.stack = config.state.env === 'local' || config.state.env === 'test' ? err.stack : undefined;
+			this.stack = [Envs.local, Envs.test].includes(config.state.env) ? err.stack : undefined;
 		}
 	}
 }
