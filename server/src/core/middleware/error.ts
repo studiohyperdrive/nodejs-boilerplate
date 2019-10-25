@@ -1,8 +1,8 @@
 import { propOr } from 'ramda';
 
-import { CustomError, BodyError, HeadersError, ParamsError, QueryError } from '@shared/helpers/error';
-import { IRequest, IResponse, INext, ICustomError } from '@shared/shared.types';
-import { ValidationError } from '@shared/helpers/validation/error';
+import { CustomError, BodyError, HeadersError, ParamsError, QueryError } from '~shared/helpers/error';
+import { IRequest, IResponse, INext, ICustomError } from '~shared/shared.types';
+import { ValidationError } from '~shared/helpers/validation/error';
 
 export class ErrorMiddleware {
 	public static handleError(err: string | Error | ICustomError | null | undefined, req: IRequest, res: IResponse, next: INext): IResponse | void {

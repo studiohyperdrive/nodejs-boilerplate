@@ -1,6 +1,6 @@
 import { default as supertest } from 'supertest';
 
-import { App } from '@app';
+import { App } from '~app';
 
 import { validateErrorBody } from '../../helpers/error';
 

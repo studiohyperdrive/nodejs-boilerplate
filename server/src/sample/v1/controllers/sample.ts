@@ -1,7 +1,7 @@
 import { ApiPath, ApiOperationGet, ApiOperationPost, SwaggerDefinitionConstant } from 'swagger-express-ts';
 
-import { IRequest, IResponse, INext } from '@shared/shared.types';
-import { NotFoundError, ConflictError } from '@shared/helpers/error';
+import { IRequest, IResponse, INext } from '~shared/shared.types';
+import { NotFoundError, ConflictError } from '~shared/helpers/error';
 
 import { ISample } from '../sample.types';
 
