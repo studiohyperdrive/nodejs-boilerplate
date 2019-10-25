@@ -1,4 +1,4 @@
-import { ValidationOptions } from 'joi';
+import { ValidationOptions } from '@hapi/joi';
 
 export const allowUnknown: ValidationOptions = {
 	allowUnknown: true,

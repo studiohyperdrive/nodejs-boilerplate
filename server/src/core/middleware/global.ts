@@ -1,6 +1,6 @@
-import { Application } from 'express';
 import { default as bodyParser } from 'body-parser';
 import { default as cookieParser } from 'cookie-parser';
+import { Application } from 'express';
 import { default as helmet } from 'helmet';
 
 export class GlobalMiddleware {

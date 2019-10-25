@@ -1,5 +1,5 @@
-import { ICustomError, ICustomErrorDetail } from '@shared/shared.types';
-import { default as config } from '@config';
+import { default as config } from '~config';
+import { ICustomError, ICustomErrorDetail } from '~shared/shared.types';
 
 export const validateError = <T>(err: ICustomError, type: T, status: number, name: string, message: string, details?: ICustomErrorDetail[]): void => {
 	expect(err).toBeDefined();
