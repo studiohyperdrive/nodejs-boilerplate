@@ -9,6 +9,32 @@
 		"no-console": [true],
 		"no-increment-decrement": [false],
 		"ter-indent": [false, "tab"],
+		"ordered-imports": [
+			true,
+			{
+				"import-sources-order": "lowercase-first",
+				"named-imports-order": "lowercase-first",
+				"module-source-path": "full",
+				"grouped-imports": true,
+				"groups": [
+					{
+						"name": "internal module",
+						"match": "^\\..*$",
+						"order": 30
+					},
+					{
+						"name": "app module",
+						"match": "^~.*$",
+						"order": 20
+					},
+					{
+						"name": "libraries",
+						"match": "^[^~\\.].*$",
+						"order": 10
+					}
+				]
+			}
+		],
 		"trailing-comma": [
 			true,
 			{
