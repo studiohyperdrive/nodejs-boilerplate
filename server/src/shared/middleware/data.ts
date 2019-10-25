@@ -1,8 +1,8 @@
 import { clone, curry } from 'ramda';
 
-import { IRequest, IResponse, INext, IValidationOrigin, IValidationPreset } from '../shared.types';
-import { ValidationError } from '../helpers/validation/error';
 import { Validator } from '../helpers/validation';
+import { ValidationError } from '../helpers/validation/error';
+import { INext, IRequest, IResponse, IValidationOrigin, IValidationPreset } from '../shared.types';
 
 export class DataMiddleware {
 	public static validate = curry(DataMiddleware.runValidation);

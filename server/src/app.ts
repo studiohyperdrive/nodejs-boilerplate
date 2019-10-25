@@ -1,18 +1,17 @@
-import { AddressInfo } from 'net';
 import { default as express, Application } from 'express';
 import { Server } from 'http';
+import { AddressInfo } from 'net';
 
 import { default as config } from '~config';
+import { IConfig } from '~config/config.types';
+import { CoreModule } from '~core';
+import { presets as corePresets } from '~core/helpers/presets';
 import { ErrorMiddleware } from '~core/middleware/error';
 import { GlobalMiddleware } from '~core/middleware/global';
-import { IConfig } from '~config/config.types';
-import { logger } from '~shared/helpers/logger';
-import { presets as corePresets } from '~core/helpers/presets';
 import { SwaggerMiddleware } from '~core/middleware/swagger';
-import { Validator } from '~shared/helpers/validation';
-
-import { CoreModule } from '~core';
 import { SampleModule } from '~sample';
+import { logger } from '~shared/helpers/logger';
+import { Validator } from '~shared/helpers/validation';
 
 export class App {
 	public app: Application = express();

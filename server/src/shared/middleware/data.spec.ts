@@ -1,8 +1,8 @@
 import { default as Joi } from '@hapi/joi';
 import { mockReq, mockRes } from 'sinon-express-mock';
 
+import { INext, IRequest, IResponse, IValidationError, IValidationPreset } from '../shared.types';
 import { DataMiddleware } from './data';
-import { IRequest, IResponse, INext, IValidationError, IValidationPreset } from '../shared.types';
 
 describe('[UNIT - SHARED] DataMiddleware', () => {
 	describe('Copy' , () => {
