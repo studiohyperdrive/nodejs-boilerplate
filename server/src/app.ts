@@ -18,16 +18,12 @@ export class App {
 	public config: IConfig = CONFIG;
 	public server: Server;
 
-	constructor(start: boolean = true) {
-		Validator.validate(process.env, corePresets.env, 'Invalid environment variables');
+	constructor() {
+		process.env = Validator.validate(process.env, corePresets.env, 'Invalid environment variables');
 
 		this.loadMiddleware();
 		this.loadModules();
 		this.loadErrorHandling();
-
-		if (start) {
-			this.start();
-		}
 	}
 
 	public start(): void {
