@@ -1,6 +1,6 @@
 import { Application } from 'express';
 
-import { DataMiddleware } from '@shared/middleware/data';
+import { DataMiddleware } from '~shared/middleware/data';
 
 import { presets } from './helpers/presets';
 import { SampleController } from './controllers/sample';
