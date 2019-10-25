@@ -2,6 +2,8 @@ import { default as supertest } from 'supertest';
 
 import { App } from '@app';
 
+import { validateErrorBody } from '../../helpers/error';
+
 const api = supertest(new App(false).app);
 
 describe('[INTEGRATION - SAMPLE] Samples route', () => {
@@ -41,19 +43,7 @@ describe('[INTEGRATION - SAMPLE] Samples route', () => {
 			api.get('/v1/samples/2')
 				.expect(404)
 				.then((res: supertest.Response) => {
-					expect(res.body).toBeObject();
-					expect(res.body).toContainAllKeys([
-						'host',
-						'identifier',
-						'timestamp',
-						'status',
-						'name',
-						'message',
-						'stack',
-					]);
-					expect(res.body.status).toEqual(404);
-					expect(res.body.name).toEqual('Not Found');
-					expect(res.body.message).toEqual('Resource not found');
+					validateErrorBody(res.body, 404, 'Not Found', 'Resource not found');
 					done();
 				})
 				.catch(done);
@@ -82,20 +72,9 @@ describe('[INTEGRATION - SAMPLE] Samples route', () => {
 			api.post('/v1/samples')
 				.expect(400)
 				.then((res: supertest.Response) => {
-					expect(res.body).toBeObject();
-					expect(res.body).toContainAllKeys([
-						'host',
-						'identifier',
-						'timestamp',
-						'status',
-						'name',
-						'message',
-						'details',
-						'stack',
-					]);
-					expect(res.body.status).toEqual(400);
-					expect(res.body.name).toEqual('Bad Request');
-					expect(res.body.message).toEqual('Invalid body');
+					validateErrorBody(res.body, 400, 'Bad Request', 'Invalid body', [{
+						err: '\"id\" is required',
+					}]);
 					done();
 				})
 				.catch(done);
@@ -108,19 +87,7 @@ describe('[INTEGRATION - SAMPLE] Samples route', () => {
 				})
 				.expect(409)
 				.then((res: supertest.Response) => {
-					expect(res.body).toBeObject();
-					expect(res.body).toContainAllKeys([
-						'host',
-						'identifier',
-						'timestamp',
-						'status',
-						'name',
-						'message',
-						'stack',
-					]);
-					expect(res.body.status).toEqual(409);
-					expect(res.body.name).toEqual('Conflict');
-					expect(res.body.message).toEqual('The request could not be completed due to a conflict with the current state of the target resource');
+					validateErrorBody(res.body, 409, 'Conflict', 'The request could not be completed due to a conflict with the current state of the target resource');
 					done();
 				})
 				.catch(done);
