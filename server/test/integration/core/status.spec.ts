@@ -3,7 +3,7 @@ import { default as supertest } from 'supertest';
 import { App } from '~app';
 import { version } from '~pkg';
 
-const api = supertest(new App(false).app);
+const api = supertest(new App().app);
 
 describe('[INTEGRATION - CORE] Status route', () => {
 	it('Should return the server status', (done: jest.DoneCallback) => {

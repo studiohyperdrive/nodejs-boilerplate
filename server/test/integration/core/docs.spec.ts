@@ -9,7 +9,7 @@ let api: supertest.SuperTest<supertest.Test>;
 describe('[INTEGRATION - CORE] Docs route', () => {
 	describe('Enabled', () => {
 		beforeAll(() => {
-			api = supertest(new App(false).app);
+			api = supertest(new App().app);
 		});
 
 		it('Should return the swagger documentation', (done: jest.DoneCallback) => {
@@ -38,7 +38,7 @@ describe('[INTEGRATION - CORE] Docs route', () => {
 	describe('Disabled', () => {
 		beforeAll(() => {
 			CONFIG.state.docs = false;
-			api = supertest(new App(false).app);
+			api = supertest(new App().app);
 		});
 
 		it('Should return the fallback route on requesting the swagger documentation', (done: jest.DoneCallback) => {
