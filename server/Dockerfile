@@ -1,5 +1,5 @@
 ### BASE ###
-FROM node:dubnium-alpine as base
+FROM node:erbium-alpine as base
 
 # Install latest npm version
 RUN npm i --global --silent npm@latest
