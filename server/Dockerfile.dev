@@ -1,4 +1,4 @@
-FROM node:dubnium-alpine
+FROM node:erbium-alpine
 
 # Expose ports
 EXPOSE 3000 5858
