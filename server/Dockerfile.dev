@@ -10,7 +10,7 @@ RUN yarn global upgrade --silent yarn@latest
 RUN mkdir /app && chown node:node /app
 WORKDIR /app
 USER node
-COPY package.json yarn.lock .yarnrc ./
+COPY --chown=node:node package.json yarn.lock .yarnrc ./
 RUN yarn install --silent
 ENV PATH /app/node_modules/.bin:$PATH
 

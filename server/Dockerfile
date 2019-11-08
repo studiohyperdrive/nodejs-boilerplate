@@ -11,7 +11,7 @@ FROM base as builder
 RUN mkdir /app && chown node:node /app
 WORKDIR /app
 USER node
-COPY package.json yarn.lock .yarnrc ./
+COPY --chown=node:node package.json yarn.lock .yarnrc ./
 RUN yarn cache clean && yarn install --silent
 ENV PATH /app/node_modules/.bin:$PATH
 
@@ -33,14 +33,14 @@ EXPOSE 80
 RUN mkdir /app && chown node:node /app
 WORKDIR /app
 USER node
-COPY package.json yarn.lock .yarnrc ./
+COPY --chown=node:node package.json yarn.lock .yarnrc ./
 RUN yarn cache clean && yarn install --production --silent
 ENV PATH /app/node_modules/.bin:$PATH
 
 # Copy built source code
 RUN mkdir /app/server
 WORKDIR /app/server
-COPY --from=builder /app/server/tsconfig*.json ./
-COPY --from=builder /app/server/dist ./
+COPY --chown=node:node --from=builder /app/server/tsconfig*.json ./
+COPY --chown=node:node --from=builder /app/server/dist ./
 
 CMD node -r tsconfig-paths/register index.js
