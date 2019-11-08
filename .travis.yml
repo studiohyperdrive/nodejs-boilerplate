@@ -11,9 +11,7 @@ install:
 
 script:
   - yarn run lint
-  - docker run --name nodejs-boilerplate-server nodejs-boilerplate-server whoami
-  - docker run --name nodejs-boilerplate-server nodejs-boilerplate-server ls -al
-  - docker run --name nodejs-boilerplate-server nodejs-boilerplate-server yarn run test
+  - docker run --name nodejs-boilerplate-server nodejs-boilerplate-server whoami && ls -al &&yarn run test
   - docker cp nodejs-boilerplate-server:/app/server/test/coverage /tmp/coverage
 
 after_success:
