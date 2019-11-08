@@ -3,7 +3,7 @@ services:
   - docker
 
 before_install:
-  - (cd server && docker build -t nodejs-boilerplate-server -f ./Dockerfile.dev .)
+  - docker build -t nodejs-boilerplate-server -f ./server/Dockerfile.dev ./server
 
 install:
   - yarn global add --silent codecov
