@@ -4,12 +4,14 @@ FROM node:erbium-alpine
 EXPOSE 3000 5858
 
 # Install latest npm version
-RUN npm i --global --silent npm@latest
+RUN yarn global upgrade --silent yarn@latest
 
 # Install dependencies
+RUN mkdir /app && chown node:node /app
 WORKDIR /app
-COPY package*.json .npmrc ./
-RUN npm i --silent
+USER node
+COPY package.json yarn.lock .yarnrc ./
+RUN yarn install --silent
 ENV PATH /app/node_modules/.bin:$PATH
 
 # Set working directory for source code

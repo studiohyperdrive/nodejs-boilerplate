@@ -6,11 +6,11 @@ before_install:
   - docker build -t nodejs-boilerplate-server -f ./server/Dockerfile.dev ./server
 
 install:
-  - npm i --silent -g codecov
-  - npm i --silent
+  - yarn global install --silent codecov
+  - yarn install --silent
 
 script:
-  - npm run lint
+  - yarn run lint
   - docker run -v /coverage:/app/server/test/coverage nodejs-boilerplate-server jest --config jest.config.js --runInBand
 
 after_success:

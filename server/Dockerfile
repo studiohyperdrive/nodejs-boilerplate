@@ -2,23 +2,26 @@
 FROM node:erbium-alpine as base
 
 # Install latest npm version
-RUN npm i --global --silent npm@latest
+RUN yarn global upgrade --silent yarn@latest
 
 ### BUILDER STAGE ###
 FROM base as builder
 
 # Install dependencies
+RUN mkdir /app && chown node:node /app
 WORKDIR /app
-COPY package*.json .npmrc ./
-RUN npm ci --silent
+USER node
+COPY package.json yarn.lock .yarnrc ./
+RUN yarn cache clean && yarn install --silent
 ENV PATH /app/node_modules/.bin:$PATH
 
 # Copy source code
+RUN mkdir /app/server
 WORKDIR /app/server
 COPY ./ ./
 
 # Build source code
-RUN npm run build
+RUN yarn run build
 
 ### RUN STAGE ###
 FROM base as run
@@ -27,12 +30,15 @@ FROM base as run
 EXPOSE 80
 
 # Install dependencies (production only)
+RUN mkdir /app && chown node:node /app
 WORKDIR /app
-COPY package*.json .npmrc ./
-RUN npm ci --production --silent && npm cache clean --force
+USER node
+COPY package.json yarn.lock .yarnrc ./
+RUN yarn cache clean && yarn install --production --silent
 ENV PATH /app/node_modules/.bin:$PATH
 
 # Copy built source code
+RUN mkdir /app/server
 WORKDIR /app/server
 COPY --from=builder /app/server/tsconfig*.json ./
 COPY --from=builder /app/server/dist ./

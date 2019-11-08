@@ -28,7 +28,7 @@ services:
       - ./server:/app/server:delegated
       # Because `npm install`
       - ./server/package.json:/app/package.json
-      - ./server/package-lock.json:/app/package-lock.json
+      - ./server/yarn.lock:/app/yarn.lock
       # Block local modules
       - /app/server/node_modules
     <<: *default-options
