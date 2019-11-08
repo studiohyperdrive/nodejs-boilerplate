@@ -3,7 +3,8 @@ services:
   - docker
 
 before_install:
-  - cd server && docker build -t nodejs-boilerplate-server -f ./Dockerfile.dev .
+  - cd server
+  - docker build -t nodejs-boilerplate-server -f ./Dockerfile.dev .
 
 install:
   - yarn global add --silent codecov
@@ -11,8 +12,6 @@ install:
 
 script:
   - yarn run lint
-  - docker run -v /coverage:/app/server/test/coverage nodejs-boilerplate-server whoami
-  - docker run -v /coverage:/app/server/test/coverage nodejs-boilerplate-server ls -al
   - docker run -v /coverage:/app/server/test/coverage nodejs-boilerplate-server jest --config jest.config.js --runInBand
 
 after_success:

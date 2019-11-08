@@ -11,6 +11,10 @@ const presets: { [key: string]: ILoggerConfig } = {
 			'cron',
 			'db',
 		],
+		filesystem: {
+			enabled: false,
+			path: '',
+		},
 	},
 	default: {
 		enabled: [
@@ -21,6 +25,10 @@ const presets: { [key: string]: ILoggerConfig } = {
 			'cron',
 			'db',
 		],
+		filesystem: {
+			enabled: false,
+			path: '',
+		},
 	},
 	silent: {
 		enabled: [
@@ -29,11 +37,19 @@ const presets: { [key: string]: ILoggerConfig } = {
 			'cron',
 			'db',
 		],
+		filesystem: {
+			enabled: false,
+			path: '',
+		},
 	},
 	error: {
 		enabled: [
 			'error',
 		],
+		filesystem: {
+			enabled: false,
+			path: '',
+		},
 	},
 };
 
