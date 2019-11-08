@@ -11,7 +11,8 @@ install:
 
 script:
   - yarn run lint
-  - docker run -v /tmp/coverage:/app/server/test/coverage nodejs-boilerplate-server yarn run test
+  - docker run --name nodejs-boilerplate-server nodejs-boilerplate-server yarn run test
+  - docker cp nodejs-boilerplate-server:/app/server/test/coverage /tmp/coverage
 
 after_success:
   - codecov -f /tmp/coverage/lcov.info -t f00e25b3-f357-4c83-a4c4-c9a55950e2c2
