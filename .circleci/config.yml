@@ -1,0 +1,261 @@
+##################################################################################
+##                                                                              ##
+##   SHD Circle CI Config                                                       ##
+##                                                                              ##
+##   Based on: https://circleci.com/orbs/registry/orb/paperspace/docker-tools   ##
+##                                                                              ##
+##################################################################################
+
+# Define variables
+
+docker_image-server: &docker_image-server nodejs-boilerplate
+
+version: 2.1
+description: Pipeline tools for building and publishing Docker images to SHD Docker Hub and deploy them on the Kubernetes clusters
+
+# Define the project specific jobs
+jobs:
+  test_and_lint-server:
+    docker:
+    - image: circleci/node:10.16.0
+    - image: circleci/mongo:4.0
+      name: mongo-api
+    steps:
+      - test_and_lint:
+          directory: server
+
+# Define the project specific workflow(s)
+only-branches: &only-branches
+  filters:
+    branches:
+      only: /.*/
+    tags:
+      ignore: /^v.*/
+
+only-tags: &only-tags
+  filters:
+    branches:
+      ignore: /.*/
+    tags:
+      only: /^v.*/
+
+workflows:
+  test_and_lint:
+    jobs:
+      - test_and_lint-server: *only-branches
+
+##################################################################################
+##                                                                              ##
+##   REUSABLE COMMANDS                                                          ##
+##                                                                              ##
+##   Do not change!                                                             ##
+##                                                                              ##
+##################################################################################
+
+commands:
+  setup:
+    description: Setup Docker and verify registry credentials
+    parameters:
+      docker_registry:
+        description: Docker registry
+        type: string
+      docker_username:
+        description: Docker registry username
+        type: string
+      docker_password:
+        description: Docker registry password
+        type: string
+    steps:
+      - setup_remote_docker
+      - run:
+          name: Setup Docker registry
+          command: echo << parameters.docker_password >> | docker login << parameters.docker_registry >> -u << parameters.docker_username >>  --password-stdin
+
+  pull:
+    description: Pull Docker image for a given image tag
+    parameters:
+      docker_image:
+        description: Name of the image to be pulled
+        type: string
+      docker_tag:
+        description: Tag of the image to be pulled
+        type: string
+    steps:
+      - run:
+          name: Pull Docker image
+          command: docker pull << parameters.docker_image >>:<< parameters.docker_tag >>
+
+  build:
+    description: Build Docker image
+    parameters:
+      docker_image:
+        description: Name of the image being built
+        type: string
+      docker_tag:
+        description: Tag of the image being built
+        type: string
+      docker_registry:
+        description: Docker registry
+        type: string
+      docker_file:
+        description: Path to a Dockerfile
+        type: string
+        default: Dockerfile
+      docker_context:
+        description: Path to context used by docker build
+        type: string
+        default: .
+    steps:
+      - run:
+          name: Build Docker image
+          command: |
+            docker build \
+              --label studio.hyperdrive.vc.sha=${CIRCLE_SHA1} \
+              --label studio.hyperdrive.ci.build-number=${CIRCLE_BUILD_NUM} \
+              --label studio.hyperdrive.ci.branch=${CIRCLE_BRANCH} \
+              -t << parameters.docker_registry >>/<< parameters.docker_image >>:<< parameters.docker_tag >> \
+              -f << parameters.docker_file >> \
+              << parameters.docker_context >>
+
+  tag:
+    description: Tag Docker image
+    parameters:
+      docker_image:
+        description: Name of the image to be tagged
+        type: string
+      docker_tag_from:
+        description: Source image tag
+        type: string
+      docker_tag_to:
+        description: Additional tag for this image
+        type: string
+    steps:
+      - run:
+          name: Tag Docker image
+          command: docker tag << parameters.docker_image >>:<< parameters.docker_tag_from >> << parameters.docker_image >>:<< parameters.docker_tag_to >>
+
+  push:
+    description: Push Docker image
+    parameters:
+      docker_image:
+        description: Name of the image being pushed
+        type: string
+      docker_tag:
+        description: Tag of the image being pushed
+        type: string
+      docker_registry:
+        description: Docker registry
+        type: string
+    steps:
+      - run:
+          name: Push Docker image
+          command: docker push << parameters.docker_registry >>/<< parameters.docker_image >>:<< parameters.docker_tag >>
+
+  build_and_push:
+    description: Build an image, tag it with the build commit hash, build number and one optional tag. Push all the tags to the registry.
+    parameters:
+      docker_registry:
+        description: Docker registry username
+        type: string
+      docker_username:
+        description: Docker registry username
+        type: string
+      docker_password:
+        description: Docker registry password
+        type: string
+      docker_image:
+        description: Docker image uri
+        type: string
+      docker_tag:
+        description: Additional tag for this image (optional)
+        type: string
+        default: ""
+      docker_file:
+        description: Path to a docker file
+        type: string
+        default: Dockerfile
+      docker_context:
+        description: Path to context used by docker build
+        type: string
+        default: .
+      workspace_root:
+        description: Root directory of the namespace
+        type: string
+        default: .
+    steps:
+      - checkout
+      - attach_workspace:
+          at: << parameters.workspace_root >>
+      - setup:
+          docker_registry: << parameters.docker_registry >>
+          docker_username: << parameters.docker_username >>
+          docker_password: << parameters.docker_password >>
+      - build:
+          docker_registry: << parameters.docker_registry >>
+          docker_image: << parameters.docker_image >>
+          docker_tag: << parameters.docker_tag >>
+          docker_file: << parameters.docker_file >>
+          docker_context: << parameters.docker_context >>
+      - push:
+          docker_registry: << parameters.docker_registry >>
+          docker_image: << parameters.docker_image >>
+          docker_tag:  << parameters.docker_tag >>
+
+  test_and_lint:
+    description: Test and lint project.
+    parameters:
+      directory:
+        description: Directory of the project
+        type: string
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "<< parameters.directory >>/package.json" }}
+      - run:
+          name: Install dependencies
+          command: cd << parameters.directory >> && ([[ -f package-lock.json ]] && npm ci || yarn install)
+      - save_cache:
+          key: dependency-cache-{{ checksum "<< parameters.directory >>/package.json" }}
+          paths:
+            - << parameters.directory >>/node_modules
+      - run:
+          name: Linting
+          command: cd << parameters.directory >> && ([[ -f package-lock.json ]] && npm run lint || yarn run lint)
+      - run:
+          name: Run unit tests
+          command: cd << parameters.directory >> && ([[ -f package-lock.json ]] && npm run test || yarn run test)
+
+  kube_deploy:
+    description: Trigger Kubernetes deployment
+    parameters:
+      circle_token:
+        description: Circle CI API token
+        type: string
+      docker_image:
+        description: Docker image
+        type: string
+      docker_tag:
+        description: Docker tag for the deploy
+        type: string
+      docker_registry:
+        description: Docker registry
+        type: string
+      kube_cluster:
+        description: Kubernetes cluster to be deployed to.
+        type: string
+      kube_deployment:
+        description: Path to a Kubernetes deployment file
+        type: string
+    steps:
+      - run: |
+          curl -X POST \
+            "https://circleci.com/api/v2/project/bitbucket/district01/<< parameters.kube_cluster >>/pipeline?circle-token=<< parameters.circle_token >>" \
+            -H 'Content-Type: application/json' \
+            -d '{
+              "parameters": {
+                "DOCKER_IMAGE": "'"<< parameters.docker_registry >>/<< parameters.docker_image >>"'",
+                "DOCKER_TAG": "'"<< parameters.docker_tag >>"'",
+                "KUBE_DEPLOYMENT": "'"<< parameters.kube_deployment >>"'",
+                "API_WORKFLOW": true
+              }
+            }'
