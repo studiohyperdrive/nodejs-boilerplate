@@ -13,7 +13,8 @@
     "pretest": "yarn run clean:coverage",
     "test": "jest --config jest.config.js --runInBand",
     "test:watch": "yarn run test -- --watchAll",
-    "posttest": "yarn run lint",
+    "test:codecov": "codecov -f ./test/coverage/lcov.info -t f00e25b3-f357-4c83-a4c4-c9a55950e2c2",
+    "posttest": "yarn run lint && yarn run test:codecov",
     "clean:build": "rm -rf ./dist",
     "clean:coverage": "rm -rf ./test/coverage",
     "open:coverage": "open ./test/coverage/lcov-report/index.html"
@@ -47,6 +48,7 @@
     "@types/supertest": "2.0.8",
     "@types/swagger-ui-express": "3.0.1",
     "@types/uuid": "3.4.5",
+    "codecov": "3.6.1",
     "dotenv": "8.2.0",
     "jest": "24.9.0",
     "jest-extended": "0.11.2",

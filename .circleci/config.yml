@@ -224,12 +224,6 @@ commands:
       - run:
           name: Run unit tests
           command: cd << parameters.directory >> && ([[ -f package-lock.json ]] && npm run test || yarn run test)
-      - run:
-          name: Install codecov
-          command: cd << parameters.directory >> && ([[ -f package-lock.json ]] && npm i -g --silent codecov || yarn global add --silent codecov)
-      - run:
-          name: Send coverage to codecov
-          command: cd << parameters.directory >> && codecov -f ./test/coverage/lcov.info -t f00e25b3-f357-4c83-a4c4-c9a55950e2c2
 
   kube_deploy:
     description: Trigger Kubernetes deployment
