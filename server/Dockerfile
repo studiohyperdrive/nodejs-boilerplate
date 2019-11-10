@@ -26,8 +26,9 @@ RUN yarn run build
 ### RUN STAGE ###
 FROM base as run
 
-# Expose port
+# Expose port & allow Node.js to use priviliged ports
 EXPOSE 80
+RUN apk add libcap && setcap CAP_NET_BIND_SERVICE=+eip /usr/local/bin/node
 
 # Install dependencies (production only)
 RUN mkdir /app && chown node:node /app
