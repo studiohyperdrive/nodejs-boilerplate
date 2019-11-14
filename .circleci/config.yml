@@ -1,0 +1,72 @@
+##################################################################################
+##                                                                              ##
+##   SHD CircleCI Config                                                       ##
+##                                                                              ##
+##   Based on: https://circleci.com/orbs/registry/orb/paperspace/docker-tools   ##
+##                                                                              ##
+##################################################################################
+
+version: 2.1
+description: Pipeline tools for building and publishing Docker images to SHD Docker Hub and deploy them on the Kubernetes clusters
+
+# Define the project specific jobs
+jobs:
+  test_and_lint-server:
+    docker:
+    - image: circleci/node:12.13.0
+    steps:
+      - test_and_lint:
+          directory: server
+
+# Define the project specific workflow(s)
+only-branches: &only-branches
+  filters:
+    branches:
+      only: /.*/
+    tags:
+      ignore: /^v.*/
+
+only-tags: &only-tags
+  filters:
+    branches:
+      ignore: /.*/
+    tags:
+      only: /^v.*/
+
+workflows:
+  test_and_lint:
+    jobs:
+      - test_and_lint-server: *only-branches
+
+##################################################################################
+##                                                                              ##
+##   REUSABLE COMMANDS                                                          ##
+##                                                                              ##
+##   Do not change!                                                             ##
+##                                                                              ##
+##################################################################################
+
+commands:
+  test_and_lint:
+    description: Test and lint project.
+    parameters:
+      directory:
+        description: Directory of the project
+        type: string
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "<< parameters.directory >>/package.json" }}
+      - run:
+          name: Install dependencies
+          command: cd << parameters.directory >> && ([[ -f package-lock.json ]] && npm ci || yarn install)
+      - save_cache:
+          key: dependency-cache-{{ checksum "<< parameters.directory >>/package.json" }}
+          paths:
+            - << parameters.directory >>/node_modules
+      - run:
+          name: Linting
+          command: cd << parameters.directory >> && ([[ -f package-lock.json ]] && npm run lint || yarn run lint)
+      - run:
+          name: Run unit tests
+          command: cd << parameters.directory >> && ([[ -f package-lock.json ]] && npm run test || yarn run test)
