@@ -596,10 +596,10 @@
   dependencies:
     "@types/superagent" "*"
 
-"@types/swagger-ui-express@3.0.1":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@types/swagger-ui-express/-/swagger-ui-express-3.0.1.tgz#2ffc0abcea9588501435f8162ab3193497180292"
-  integrity sha512-AHIIs9tUDimRAKvmHHBXxNfavjcvZuGgu/iXaSVpBk+C6EO/H1PUBIq4l5opFXLbV+hBuVbYnpycbobhSoMjTA==
+"@types/swagger-ui-express@4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@types/swagger-ui-express/-/swagger-ui-express-4.1.0.tgz#307b7c16ec06a34510067aaffcd077055c092476"
+  integrity sha512-k6a+ivG1IpopddLcBAsYDbYQ9KU06Sixt8MUaBfnIOSLmWtKQhKpna/bQaM5KDssAiPvpD+wibo3rgq6Tg3r8Q==
   dependencies:
     "@types/express" "*"
     "@types/serve-static" "*"
