@@ -1,6 +1,6 @@
 # NODEJS-BOILERPLATE 2.0 #
 
-[![Travis CI badge](https://travis-ci.org/studiohyperdrive/nodejs-boilerplate.png?branch=master)](https://travis-ci.org/studiohyperdrive/nodejs-boilerplate)
+[![CircleCI](https://circleci.com/gh/studiohyperdrive/nodejs-boilerplate/tree/master.svg?style=svg)](https://circleci.com/gh/studiohyperdrive/nodejs-boilerplate/tree/master)
 [![Codecov badge](https://img.shields.io/codecov/c/gh/studiohyperdrive/nodejs-boilerplate.svg)](https://codecov.io/gh/studiohyperdrive/nodejs-boilerplate)
 [![Greenkeeper badge](https://badges.greenkeeper.io/studiohyperdrive/nodejs-boilerplate.svg)](https://greenkeeper.io)
 [![License badge](https://img.shields.io/badge/license-ISC-yellow.svg)](https://opensource.org/licenses/ISC)
