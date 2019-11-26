@@ -1,6 +1,5 @@
 {
 	"compilerOptions": {
-		"baseUrl": ".",
 		"module": "commonjs",
 		"moduleResolution": "node",
 		"outDir": "dist",
@@ -21,29 +20,10 @@
 			"dom",
 			"es2015"
 		],
-		"types": [
-			"jest"
-		],
 		"typeRoots": [
 			"../node_modules/@types",
 			"node_modules/@types"
 		],
-		"paths": {
-			"~app": ["src/app"],
-			"~config": ["src/config"],
-			"~config/*": ["src/config/*"],
-			"~core": ["src/core"],
-			"~core/*": ["src/core/*"],
-			"~mocks": ["test/mocks"],
-			"~mocks/*": ["test/mocks/*"],
-			"~pkg": ["package.json"],
-			"~sample": ["src/sample"],
-			"~sample/*": ["src/sample/*"],
-			"~shared": ["src/shared"],
-			"~shared/*": ["src/shared/*"],
-			"~test": ["test"],
-			"~test/*": ["test/*"]
-		}
 	},
 	"include": [
 		"index.ts",
@@ -57,5 +37,6 @@
 		"**/coverage/**",
 		"**/dist/**",
 		"**/node_modules/**"
-	]
+	],
+	"extends": "./tsconfig.paths.json"
 }
