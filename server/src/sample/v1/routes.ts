@@ -1,9 +1,9 @@
 import { Application } from 'express';
 
-import { DataMiddleware } from '@shared/middleware/data';
+import { DataMiddleware } from '~shared/middleware/data';
 
-import { presets } from './helpers/presets';
 import { SampleController } from './controllers/sample';
+import { presets } from './helpers/presets';
 
 export class SampleRoutes {
 	public static baseUrl: string = '/v1/samples';

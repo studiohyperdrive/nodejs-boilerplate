@@ -1,9 +1,9 @@
 import { mockReq, mockRes } from 'sinon-express-mock';
 
-import { CustomError } from '@shared/helpers/error';
-import { IRequest, IResponse, ICustomError, IBodyError, IHeadersError, IParamsError, IQueryError } from '@shared/shared.types';
-import { validateErrorBody } from '@test/helpers/error';
-import { ValidationError } from '@shared/helpers/validation/error';
+import { CustomError } from '~shared/helpers/error';
+import { ValidationError } from '~shared/helpers/validation/error';
+import { IBodyError, ICustomError, IHeadersError, IParamsError, IQueryError, IRequest, IResponse } from '~shared/shared.types';
+import { validateErrorBody } from '~test/helpers/error';
 
 import { ErrorMiddleware } from './error';
 

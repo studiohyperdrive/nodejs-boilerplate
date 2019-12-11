@@ -1,6 +1,6 @@
 import { SwaggerDefinitionConstant } from 'swagger-express-ts';
 
-import { ISwaggerModels } from '@shared/shared.types';
+import { ISwaggerModels } from '~shared/shared.types';
 
 export const models: ISwaggerModels = {
 	Error: {
