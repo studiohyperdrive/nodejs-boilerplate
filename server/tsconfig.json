@@ -29,22 +29,31 @@
 			"node_modules/@types"
 		],
 		"paths": {
-			"@app": ["src/app"],
-			"@modules": ["src/modules"],
-			"@modules/*": ["src/modules/*"],
-			"@config": ["src/config"],
-			"@config/*": ["src/config/*"],
-			"@mocks": ["test/mocks"],
-			"@mocks/*": ["test/mocks/*"],
-			"@pkg": ["package.json"],
-			"@shared": ["src/shared"],
-			"@shared/*": ["src/shared/*"],
-			"@test": ["test"],
-			"@test/*": ["test/*"]
+			"~app": ["src/app"],
+			"~modules": ["src/modules"],
+			"~modules/*": ["src/modules/*"],
+			"~config": ["src/config"],
+			"~config/*": ["src/config/*"],
+			"~core": ["src/core"],
+			"~core/*": ["src/core/*"],
+			"~mocks": ["test/mocks"],
+			"~mocks/*": ["test/mocks/*"],
+			"~pkg": ["package.json"],
+			"~sample": ["src/sample"],
+			"~sample/*": ["src/sample/*"],
+			"~shared": ["src/shared"],
+			"~shared/*": ["src/shared/*"],
+			"~test": ["test"],
+			"~test/*": ["test/*"]
 		}
 	},
 	"include": [
-		"**/*.ts"
+		"index.ts",
+		"src/**/*.ts",
+		"src/**/*.spec.ts",
+		"test/index.ts",
+		"test/**/*.ts",
+		"test/**/*.spec.ts"
 	],
 	"exclude": [
 		"**/coverage/**",

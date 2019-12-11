@@ -1,8 +1,8 @@
-import { default as Joi } from 'joi';
+import { default as Joi } from '@hapi/joi';
 import { mockReq, mockRes } from 'sinon-express-mock';
 
+import { INext, IRequest, IResponse, IValidationError, IValidationPreset } from '../shared.types';
 import { DataMiddleware } from './data';
-import { IRequest, IResponse, INext, IValidationError, IValidationPreset } from '../shared.types';
 
 describe('[UNIT - SHARED] DataMiddleware', () => {
 	describe('Copy' , () => {
@@ -55,7 +55,7 @@ describe('[UNIT - SHARED] DataMiddleware', () => {
 		const preset: IValidationPreset = {
 			options: {},
 			schema: Joi.object().required().keys({
-				key: Joi.string().required().valid(['value']),
+				key: Joi.string().required().valid('value'),
 			}),
 		};
 

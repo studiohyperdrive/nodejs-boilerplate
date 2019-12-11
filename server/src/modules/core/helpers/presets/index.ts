@@ -1,7 +1,11 @@
-import { IValidationPreset } from '@shared/shared.types';
+import { IValidationPreset } from '~shared/shared.types';
 
 import { env } from './env';
 
-export const presets: { [key: string]: IValidationPreset } = {
+interface IValidationPresets {
+	env: IValidationPreset;
+}
+
+export const presets: IValidationPresets = {
 	env,
 };

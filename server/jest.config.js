@@ -42,10 +42,14 @@ module.exports = {
 		'<rootDir>/src/**/*.spec.[jt]s',
 		'<rootDir>/test/**/*.spec.[jt]s',
 	],
+	testPathIgnorePatterns: [
+		'<rootDir>/src/dist',
+	],
 	setupFiles: [
 		'<rootDir>/test/index.ts',
 	],
 	setupFilesAfterEnv: [
 		'jest-extended',
 	],
+	forceExit: true,
 };

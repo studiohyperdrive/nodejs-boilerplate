@@ -1,5 +1,5 @@
-import { logger } from '@shared/helpers/logger';
-import { wait } from '@test/helpers/wait';
+import { logger } from '~shared/helpers/logger';
+import { wait } from '~test/helpers/wait';
 
 import { App } from './app';
 
@@ -11,7 +11,7 @@ describe('[UNIT - APP] Application', () => {
 	let loggerInfoSpy: jest.SpyInstance;
 
 	beforeEach(() => {
-		app = new App(false);
+		app = new App();
 
 		exitProcessSpy = jest.spyOn(process, 'exit').mockImplementation();
 		loggerErrorSpy = jest.spyOn(logger, 'error');
@@ -22,20 +22,6 @@ describe('[UNIT - APP] Application', () => {
 		exitProcessSpy.mockRestore();
 		loggerErrorSpy.mockRestore();
 		loggerInfoSpy.mockRestore();
-	});
-
-	it('Should start an Express server using the constructor', async (done: jest.DoneCallback) => {
-		app = new App();
-
-		await wait(500);
-
-		expect(app).toBeDefined();
-		expect(app.app).toBeDefined();
-		expect(app.server).toBeDefined();
-		expect(loggerInfoSpy).toHaveBeenCalledWith('Server running on test environment at port 3001');
-
-		app.server.close();
-		done();
 	});
 
 	it('Should start an Express server', async (done: jest.DoneCallback) => {
@@ -63,7 +49,6 @@ describe('[UNIT - APP] Application', () => {
 
 		expect(loggerErrorSpy).toHaveBeenCalledWith(error);
 		expect(exitProcessSpy).toHaveBeenCalledWith(1);
-
 		done();
 	});
 

@@ -1,20 +1,20 @@
-import { default as Joi, ValidationResult } from 'joi';
+import { default as Joi, ValidationResult } from '@hapi/joi';
 
-import { allowUnknown, stripUnknown } from './options';
-import { CustomError } from '../error';
 import { IValidationPreset } from '../../shared.types';
+import { CustomError } from '../error';
 import { Validator } from './index';
+import { allowUnknown, stripUnknown } from './options';
 
 describe('[UNIT - SHARED] Validation - Validator', () => {
 	const preset: IValidationPreset = {
 		options: {},
 		schema: Joi.object().required().keys({
-			key: Joi.string().required().valid(['value']),
+			key: Joi.string().required().valid('value'),
 		}),
 	};
 
 	it('Should return the object if there are no errors', (done: jest.DoneCallback) => {
-		const result: ValidationResult<any> = Validator.validate({ key: 'value' }, preset, 'Validation failed'); // tslint:disable-line no-any
+		const result: ValidationResult = Validator.validate({ key: 'value' }, preset, 'Validation failed');
 
 		expect(result).toBeDefined();
 		expect(result).toBeObject();
@@ -29,7 +29,7 @@ describe('[UNIT - SHARED] Validation - Validator', () => {
 
 	it('Should return the object if there are no errors and allow unknown properties', (done: jest.DoneCallback) => {
 		preset.options = allowUnknown;
-		const result: ValidationResult<any> = Validator.validate({ key: 'value', unknown: true }, preset, 'Validation failed'); // tslint:disable-line no-any
+		const result: ValidationResult = Validator.validate({ key: 'value', unknown: true }, preset, 'Validation failed');
 
 		expect(result).toBeDefined();
 		expect(result).toBeObject();
@@ -46,7 +46,7 @@ describe('[UNIT - SHARED] Validation - Validator', () => {
 
 	it('Should return the object if there are no errors and strip unknown properties', (done: jest.DoneCallback) => {
 		preset.options = stripUnknown;
-		const result: ValidationResult<any> = Validator.validate({ key: 'value', unknown: false }, preset, 'Validation failed'); // tslint:disable-line no-any
+		const result: ValidationResult = Validator.validate({ key: 'value', unknown: false }, preset, 'Validation failed');
 
 		expect(result).toBeDefined();
 		expect(result).toBeObject();

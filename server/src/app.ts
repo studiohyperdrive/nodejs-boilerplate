@@ -1,34 +1,29 @@
-import { AddressInfo } from 'net';
 import { default as express, Application } from 'express';
 import { Server } from 'http';
+import { AddressInfo } from 'net';
 
-import { default as config } from '@config';
-import { ErrorMiddleware } from '@modules/core/middleware/error';
-import { GlobalMiddleware } from '@modules/core/middleware/global';
-import { IConfig } from '@config/config.types';
-import { logger } from '@shared/helpers/logger';
-import { presets as corePresets } from '@modules/core/helpers/presets';
-import { SwaggerMiddleware } from '@modules/core/middleware/swagger';
-import { Validator } from '@shared/helpers/validation';
-
-import { CoreModule } from '@modules/core';
-import { SampleModule } from '@modules/sample';
+import { default as config } from '~config';
+import { IConfig } from '~config/config.types';
+import { CoreModule } from '~modules/core';
+import { presets as corePresets } from '~modules/core/helpers/presets';
+import { ErrorMiddleware } from '~modules/core/middleware/error';
+import { GlobalMiddleware } from '~modules/core/middleware/global';
+import { SwaggerMiddleware } from '~modules/core/middleware/swagger';
+import { SampleModule } from '~modules/sample';
+import { logger } from '~shared/helpers/logger';
+import { Validator } from '~shared/helpers/validation';
 
 export class App {
 	public app: Application = express();
 	public config: IConfig = CONFIG;
 	public server: Server;
 
-	constructor(start: boolean = true) {
-		Validator.validate(process.env, corePresets.env, 'Invalid environment variables');
+	constructor() {
+		process.env = Validator.validate(process.env, corePresets.env, 'Invalid environment variables');
 
 		this.loadMiddleware();
 		this.loadModules();
 		this.loadErrorHandling();
-
-		if (start) {
-			this.start();
-		}
 	}
 
 	public start(): void {
