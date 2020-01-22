@@ -1,40 +1,40 @@
 import { isNil } from 'ramda';
 
 export class EnvHelper {
-	public static envToBoolean(env: string = ''): boolean {
-		this.checkEmpty(env);
+	public static envToBoolean(envVar: string = ''): boolean {
+		this.checkEmpty(envVar);
 
-		return env === 'true';
+		return process.env[envVar] === 'true';
 	}
 
-	public static envToNumber(env: string = ''): number {
-		this.checkEmpty(env);
+	public static envToNumber(envVar: string = ''): number {
+		this.checkEmpty(envVar);
 
-		return parseInt(env, 10);
+		return parseInt(process.env[envVar], 10);
 	}
 
-	public static envToArray(env: string = '', separator: string = ','): string[] {
-		this.checkEmpty(env);
+	public static envToArray(envVar: string = '', separator: string = ','): string[] {
+		this.checkEmpty(envVar);
 
-		return env.split(separator);
+		return process.env[envVar].split(separator);
 	}
 
-	public static envToObject(env: string = ''): object {
-		this.checkEmpty(env);
+	public static envToObject(envVar: string = ''): object {
+		this.checkEmpty(envVar);
 
 		let obj: object;
 		try {
-			obj = JSON.parse(env);
+			obj = JSON.parse(process.env[envVar]);
 		} catch {
-			throw new Error('Environment variable is not a valid JSON string');
+			throw new Error(`Environment variable ${envVar} is not a valid JSON string`);
 		}
 
 		return obj;
 	}
 
-	private static checkEmpty(env: string): void {
-		if (isNil(env) || env === '') {
-			throw new Error('Environment variable is not defined');
+	private static checkEmpty(envVar: string): void {
+		if (isNil(process.env[envVar]) || process.env[envVar] === '') {
+			throw new Error(`Environment variable ${envVar} is not defined`);
 		}
 	}
 }

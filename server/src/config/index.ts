@@ -1,18 +1,18 @@
-import { IConfig, LoggerPresets } from './config.types';
+import { IConfig } from './config.types';
 import { EnvHelper } from './helpers/env';
 import { default as loggerPresets } from './presets/logger';
 
 export default {
 	state: {
 		env: process.env.NODE_ENV,
-		docs: EnvHelper.envToBoolean(process.env.STATE_DOCS),
-		production: EnvHelper.envToBoolean(process.env.STATE_PRODUCTION),
-		test: EnvHelper.envToBoolean(process.env.STATE_TEST),
+		docs: EnvHelper.envToBoolean('STATE_DOCS'),
+		production: EnvHelper.envToBoolean('STATE_PRODUCTION'),
+		test: EnvHelper.envToBoolean('STATE_TEST'),
 	},
 	server: {
-		host: process.env.HOST,
-		port: EnvHelper.envToNumber(process.env.PORT),
+		host: 'HOST',
+		port: EnvHelper.envToNumber('PORT'),
 		timezone: process.env.TZ,
 	},
-	logger: loggerPresets[process.env['LOGGING_PRESET']],
+	logger: loggerPresets[process.env.LOGGING_PRESET],
 } as IConfig;
