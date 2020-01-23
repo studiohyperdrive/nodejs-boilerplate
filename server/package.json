@@ -5,7 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "start": "yarn run serve",
-    "serve": "ts-node-dev -r tsconfig-paths/register --transpileOnly --poll --inspect=0.0.0.0:5858 -- src/index.ts",
+    "serve": "ts-node-dev -r tsconfig-paths/register --transpileOnly --poll --inspect=0.0.0.0:5858 -- index.ts",
     "prebuild": "yarn run clean:build",
     "build": "tsc -p tsconfig.json",
     "lint": "tslint -c tslint.json -p tsconfig.json -t stylish",
