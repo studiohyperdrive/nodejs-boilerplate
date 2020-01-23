@@ -21,8 +21,8 @@
   "homepage": "https://github.com/studiohyperdrive/nodejs-boilerplate",
   "dependencies": {},
   "devDependencies": {
-    "@commitlint/cli": "8.3.5",
-    "@commitlint/config-conventional": "8.3.4",
+    "@studiohyperdrive/commitlint-config": "1.0.0",
+    "commitlint": "8.3.5",
     "eslint": "6.8.0",
     "eslint-config-airbnb-base": "14.0.0",
     "eslint-config-recommended": "4.0.0",
