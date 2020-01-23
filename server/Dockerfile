@@ -1,19 +1,26 @@
 ### BASE ###
 FROM node:erbium-alpine as base
 
+# Expose port & allow Node.js to use priviliged ports
+EXPOSE 80
+RUN apk add libcap && setcap CAP_NET_BIND_SERVICE=+eip /usr/local/bin/node
+
 # Install latest yarn version
 RUN yarn global upgrade --silent yarn@latest
+
+# Prepare installing dependencies
+RUN mkdir /app && chown node:node /app
+WORKDIR /app
+USER node
+COPY --chown=node:node package.json yarn.lock .yarnrc ./
+ENV PATH /app/node_modules/.bin:$PATH
+RUN yarn cache clean
 
 ### BUILDER STAGE ###
 FROM base as builder
 
 # Install dependencies
-RUN mkdir /app && chown node:node /app
-WORKDIR /app
-USER node
-COPY --chown=node:node package.json yarn.lock .yarnrc ./
-RUN yarn cache clean && yarn install --silent
-ENV PATH /app/node_modules/.bin:$PATH
+RUN yarn install --silent
 
 # Copy source code
 RUN mkdir /app/server
@@ -26,17 +33,8 @@ RUN yarn run build
 ### RUN STAGE ###
 FROM base as run
 
-# Expose port & allow Node.js to use priviliged ports
-EXPOSE 80
-RUN apk add libcap && setcap CAP_NET_BIND_SERVICE=+eip /usr/local/bin/node
-
 # Install dependencies (production only)
-RUN mkdir /app && chown node:node /app
-WORKDIR /app
-USER node
-COPY --chown=node:node package.json yarn.lock .yarnrc ./
-RUN yarn cache clean && yarn install --production --silent
-ENV PATH /app/node_modules/.bin:$PATH
+RUN yarn install --production --silent
 
 # Copy built source code
 RUN mkdir /app/server
