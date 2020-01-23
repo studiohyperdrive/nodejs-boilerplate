@@ -108,6 +108,10 @@ typings/
 !.vscode/tasks.json
 !.vscode/launch.json
 
+### Intellij ###
+.idea
+server/.idea
+
 ### VisualStudioCode Patch ###
 # Ignore all local history of files
 .history
