@@ -8,7 +8,7 @@ RUN apk add libcap && setcap CAP_NET_BIND_SERVICE=+eip /usr/local/bin/node
 # Install latest yarn version
 RUN yarn global upgrade --silent yarn@latest
 
-# Prepare installing dependencies
+# Setup dependencies
 RUN mkdir /app && chown node:node /app
 WORKDIR /app
 USER node
