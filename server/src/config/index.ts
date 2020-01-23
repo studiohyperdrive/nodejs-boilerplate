@@ -10,7 +10,7 @@ export default {
 		test: EnvHelper.envToBoolean('STATE_TEST'),
 	},
 	server: {
-		host: 'HOST',
+		host: process.env.HOST,
 		port: EnvHelper.envToNumber('PORT'),
 		timezone: process.env.TZ,
 	},
