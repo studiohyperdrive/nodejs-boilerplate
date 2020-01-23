@@ -31,8 +31,8 @@ export class SwaggerMiddleware {
 			null, // SwaggerDoc
 			null, // SwaggerUiOptions
 			null, // SwaggerOptions
-			false, // Custom CSS
-			false, // Custom favicon
+			null, // Custom CSS
+			null, // Custom favicon
 			'/docs/json', // URL for swagger file
 			name // Title for documentation page
 		));
