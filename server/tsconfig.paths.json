@@ -1,0 +1,21 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"~app": ["src/app"],
+			"~config": ["src/config"],
+			"~config/*": ["src/config/*"],
+			"~core": ["src/core"],
+			"~core/*": ["src/core/*"],
+			"~mocks": ["test/mocks"],
+			"~mocks/*": ["test/mocks/*"],
+			"~pkg": ["package.json"],
+			"~sample": ["src/sample"],
+			"~sample/*": ["src/sample/*"],
+			"~shared": ["src/shared"],
+			"~shared/*": ["src/shared/*"],
+			"~test": ["test"],
+			"~test/*": ["test/*"]
+		}
+	}
+}
