@@ -26,7 +26,7 @@
     "cookie-parser": "1.4.4",
     "express": "4.17.1",
     "helmet": "3.21.2",
-    "ramda": "0.26.1",
+    "ramda": "0.27.0",
     "reflect-metadata": "0.1.13",
     "swagger-express-ts": "1.0.1",
     "swagger-ui-express": "4.1.3",
