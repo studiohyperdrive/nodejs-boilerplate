@@ -1,6 +1,6 @@
 import { ValidationErrorItem } from '@hapi/joi';
 import { pathOr } from 'ramda';
-import { default as uuid } from 'uuid';
+import { v4 as uuid } from 'uuid';
 
 import { default as config } from '~config';
 import { Envs } from '~config/config.types';
