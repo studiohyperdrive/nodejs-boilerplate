@@ -20,7 +20,7 @@
     "open:coverage": "open ./test/coverage/lcov-report/index.html"
   },
   "dependencies": {
-    "@hapi/joi": "17.1.0",
+    "@hapi/joi": "17.1.1",
     "@studiohyperdrive/logger": "1.1.1",
     "body-parser": "1.19.0",
     "cookie-parser": "1.4.4",
