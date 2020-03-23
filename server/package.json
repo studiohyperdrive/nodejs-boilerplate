@@ -29,7 +29,7 @@
     "ramda": "0.27.0",
     "reflect-metadata": "0.1.13",
     "swagger-express-ts": "1.0.1",
-    "swagger-ui-express": "4.1.3",
+    "swagger-ui-express": "4.1.4",
     "tsconfig-paths": "3.9.0",
     "uuid": "7.0.2"
   },
