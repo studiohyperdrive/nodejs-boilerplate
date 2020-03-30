@@ -1,18 +1,19 @@
-import { IConfig, LoggerPresets } from './config.types';
-import { EnvHelper } from './helpers/env';
+import { default as Env } from '@studiohyperdrive/env';
+
+import { IConfig } from './config.types';
 import { default as loggerPresets } from './presets/logger';
 
 export default {
 	state: {
-		env: process.env.NODE_ENV,
-		docs: EnvHelper.envToBoolean(process.env.STATE_DOCS),
-		production: EnvHelper.envToBoolean(process.env.STATE_PRODUCTION),
-		test: EnvHelper.envToBoolean(process.env.STATE_TEST),
+		env: Env.get('NODE_ENV'),
+		docs: Env.getAsBoolean('STATE_DOCS'),
+		production: Env.getAsBoolean('STATE_PRODUCTION'),
+		test: Env.getAsBoolean('STATE_TEST'),
 	},
 	server: {
-		host: process.env.HOST,
-		port: EnvHelper.envToNumber(process.env.PORT),
-		timezone: process.env.TZ,
+		host: Env.get('HOST'),
+		port: Env.getAsNumber('PORT'),
+		timezone: Env.get('TZ'),
 	},
-	logger: loggerPresets[process.env['LOGGING_PRESET']],
+	logger: loggerPresets[Env.get('LOGGING_PRESET')],
 } as IConfig;

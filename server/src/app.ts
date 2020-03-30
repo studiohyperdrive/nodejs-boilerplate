@@ -1,3 +1,4 @@
+import { default as Env } from '@studiohyperdrive/env';
 import { default as express, Application } from 'express';
 import { Server } from 'http';
 import { AddressInfo } from 'net';
@@ -11,7 +12,6 @@ import { GlobalMiddleware } from '~core/middleware/global';
 import { SwaggerMiddleware } from '~core/middleware/swagger';
 import { SampleModule } from '~sample';
 import { logger } from '~shared/helpers/logger';
-import { Validator } from '~shared/helpers/validation';
 
 export class App {
 	public app: Application = express();
@@ -19,7 +19,7 @@ export class App {
 	public server: Server;
 
 	constructor() {
-		process.env = Validator.validate(process.env, corePresets.env, 'Invalid environment variables');
+		Env.validateEnv(corePresets.env.schema, corePresets.env.options);
 
 		this.loadMiddleware();
 		this.loadModules();
