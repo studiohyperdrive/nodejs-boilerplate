@@ -5,12 +5,12 @@ import { AddressInfo } from 'net';
 
 import { default as config } from '~config';
 import { IConfig } from '~config/config.types';
-import { CoreModule } from '~core';
-import { presets as corePresets } from '~core/helpers/presets';
-import { ErrorMiddleware } from '~core/middleware/error';
-import { GlobalMiddleware } from '~core/middleware/global';
-import { SwaggerMiddleware } from '~core/middleware/swagger';
-import { SampleModule } from '~sample';
+import { CoreModule } from '~modules/core';
+import { presets as corePresets } from '~modules/core/helpers/presets';
+import { ErrorMiddleware } from '~modules/core/middleware/error';
+import { GlobalMiddleware } from '~modules/core/middleware/global';
+import { SwaggerMiddleware } from '~modules/core/middleware/swagger';
+import { SampleModule } from '~modules/sample';
 import { logger } from '~shared/helpers/logger';
 
 export class App {
