@@ -722,10 +722,10 @@
     "@types/express-serve-static-core" "*"
     "@types/mime" "*"
 
-"@types/sinon-express-mock@1.3.7":
-  version "1.3.7"
-  resolved "https://registry.yarnpkg.com/@types/sinon-express-mock/-/sinon-express-mock-1.3.7.tgz#3ed1417f8433c413e678515027de47afc6df36a7"
-  integrity sha512-dgxb4Qu2BuMYrYake6CBkz1fzEEVzrHS72zERz0hZL6pztEOjRhTOdOqoEkjsH3TDli1R+rHVyNbSDnlaiFEOg==
+"@types/sinon-express-mock@1.3.8":
+  version "1.3.8"
+  resolved "https://registry.yarnpkg.com/@types/sinon-express-mock/-/sinon-express-mock-1.3.8.tgz#4db9fca024b5355ef5cbee48e1068ed3831e55ef"
+  integrity sha512-aYu0PMH/VLpl5GMqnhYRuosC4KY0d3gi/Jn7k8G+rJIniryPxCweYyUFvZSs12ee0zlyiWvWyGgv+CaKW5DusQ==
   dependencies:
     "@types/express" "*"
     "@types/sinon" "*"
