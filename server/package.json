@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@hapi/joi": "17.1.1",
+    "@studiohyperdrive/env": "1.0.2",
     "@studiohyperdrive/logger": "1.1.1",
     "body-parser": "1.19.0",
     "cookie-parser": "1.4.5",
@@ -34,7 +35,6 @@
     "uuid": "8.1.0"
   },
   "devDependencies": {
-    "@studiohyperdrive/env": "1.0.2",
     "@types/body-parser": "1.19.0",
     "@types/cookie-parser": "1.4.2",
     "@types/dotenv": "8.2.0",
