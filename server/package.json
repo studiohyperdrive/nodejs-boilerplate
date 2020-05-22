@@ -32,6 +32,7 @@
     "swagger-express-ts": "1.0.1",
     "swagger-ui-express": "4.1.4",
     "tsconfig-paths": "3.9.0",
+    "tslib": "2.0.0",
     "uuid": "8.1.0"
   },
   "devDependencies": {
