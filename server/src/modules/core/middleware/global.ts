@@ -14,5 +14,11 @@ export class GlobalMiddleware {
 		app.use(helmet.ieNoOpen());
 		app.use(helmet.noSniff());
 		app.use(helmet.xssFilter());
+		app.use(helmet.hsts({
+			// 2 year in seconds
+			maxAge: 63072000,
+			includeSubDomains: true,
+			preload: true,
+		}));
 	}
 }
