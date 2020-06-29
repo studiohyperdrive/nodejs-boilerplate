@@ -11,12 +11,15 @@ describe('[UNIT - CORE] GlobalMiddleware', () => {
 		const middlewares: string[] = app._router.stack.map((layer: any) => layer.name); // tslint:disable-line no-any
 
 		expect(middlewares).toContainValues([
-			'urlencodedParser',
-			'jsonParser',
 			'cookieParser',
+			'expressInit',
 			'hidePoweredBy',
-			'ienoopen',
+			'hsts',
+			'jsonParser',
 			'nosniff',
+			'query',
+			'urlencodedParser',
+			'xDownloadOptionsMiddleware',
 			'xXssProtection',
 		]);
 		done();
