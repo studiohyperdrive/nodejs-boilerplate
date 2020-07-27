@@ -20,4 +20,4 @@ WORKDIR /app/server
 COPY --chown=node:node ./ ./
 
 # Start application with live reload
-CMD ts-node-dev -r tsconfig-paths/register --transpileOnly --poll --inspect=0.0.0.0:5858 -- index.ts
+CMD ts-node-dev -r tsconfig-paths/register --transpile-only --poll --inspect=0.0.0.0:5858 -- index.ts
