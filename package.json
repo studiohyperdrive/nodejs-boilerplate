@@ -23,7 +23,7 @@
   "devDependencies": {
     "@studiohyperdrive/commitlint-config": "1.0.0",
     "commitlint": "9.1.0",
-    "eslint": "7.5.0",
+    "eslint": "7.6.0",
     "eslint-config-airbnb-base": "14.2.0",
     "eslint-config-recommended": "4.1.0",
     "eslint-plugin-import": "2.22.0",

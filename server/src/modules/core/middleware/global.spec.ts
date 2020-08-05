@@ -13,14 +13,14 @@ describe('[UNIT - CORE] GlobalMiddleware', () => {
 		expect(middlewares).toContainValues([
 			'cookieParser',
 			'expressInit',
-			'hidePoweredBy',
-			'hsts',
 			'jsonParser',
-			'nosniff',
 			'query',
+			'strictTransportSecurityMiddleware',
 			'urlencodedParser',
+			'xContentTypeOptionsMiddleware',
 			'xDownloadOptionsMiddleware',
-			'xXssProtection',
+			'xPoweredByMiddleware',
+			'xXssProtectionMiddleware',
 		]);
 		done();
 	});
