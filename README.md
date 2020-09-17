@@ -29,7 +29,7 @@ $ docker-compose up
 _Optional_: Install the Node.js packages locally:
 
 ```bash
-$ npm install
+$ yarn
 ```
 
 ## Getting started ##
@@ -41,7 +41,7 @@ Once your Docker container is running, your application is accessible on [localh
 Running TSlint inside Docker:
 
 ```bash
-$ docker-compose exec server npm run lint
+$ docker-compose exec server yarn run lint
 ```
 
 ### Running tests ###
@@ -49,7 +49,7 @@ $ docker-compose exec server npm run lint
 Running tests inside Docker:
 
 ```bash
-$ docker-compose exec server npm test
+$ docker-compose exec server yarn run test
 ```
 
 ## Bugs ##
