@@ -65,11 +65,14 @@ describe('[UNIT - SHARED] DataMiddleware', () => {
 					body: {
 						key: 'value',
 					},
+					headers: {},
+					params: {},
+					query: {},
 				},
 			});
 			const res: IResponse = mockRes();
 
-			DataMiddleware.validate('body', preset, req, res, (err: IValidationError) => {
+			DataMiddleware.validate('body', preset, req, res, (err?: unknown) => {
 				expect(err).toBeUndefined();
 				expect(req.data.body).toBeDefined();
 				expect(req.data.body).toBeObject();
@@ -89,6 +92,9 @@ describe('[UNIT - SHARED] DataMiddleware', () => {
 					body: {
 						key: 'invalid',
 					},
+					headers: {},
+					params: {},
+					query: {},
 				},
 			});
 			const res: IResponse = mockRes();

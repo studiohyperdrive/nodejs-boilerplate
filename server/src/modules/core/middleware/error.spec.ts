@@ -2,7 +2,7 @@ import { mockReq, mockRes } from 'sinon-express-mock';
 
 import { CustomError } from '~shared/helpers/error';
 import { ValidationError } from '~shared/helpers/validation/error';
-import { IBodyError, ICustomError, IHeadersError, IParamsError, IQueryError, IRequest, IResponse } from '~shared/shared.types';
+import { IBodyError, ICustomError, IHeadersError, INext, IParamsError, IQueryError, IRequest, IResponse } from '~shared/shared.types';
 import { validateErrorBody } from '~test/helpers/error';
 
 import { ErrorMiddleware } from './error';
@@ -20,7 +20,7 @@ describe('[UNIT - CORE] ErrorMiddleware', () => {
 		const req: IRequest = mockReq();
 		const res: IResponse = mockRes();
 
-		ErrorMiddleware.handleError(null, req, res, (err: Error) => {
+		ErrorMiddleware.handleError(null, req, res, (err?: unknown) => {
 			expect(err).toBeUndefined();
 			done();
 		});
@@ -31,7 +31,7 @@ describe('[UNIT - CORE] ErrorMiddleware', () => {
 		const res: IResponse = mockRes();
 		res.headersSent = true;
 
-		ErrorMiddleware.handleError(new CustomError(), req, res, (err: Error) => {
+		ErrorMiddleware.handleError(new CustomError(), req, res, (err?: unknown) => {
 			expect(err).toBeUndefined();
 			done();
 		});
@@ -53,7 +53,7 @@ describe('[UNIT - CORE] ErrorMiddleware', () => {
 			},
 		}) as IResponse;
 
-		ErrorMiddleware.handleError('error', req, res, (err: Error) => {
+		ErrorMiddleware.handleError('error', req, res, (err?: unknown) => {
 			expect(err).toBeUndefined();
 			done();
 		});
@@ -75,7 +75,7 @@ describe('[UNIT - CORE] ErrorMiddleware', () => {
 			},
 		}) as IResponse;
 
-		ErrorMiddleware.handleError(new Error('error'), req, res, (err: Error) => {
+		ErrorMiddleware.handleError(new Error('error'), req, res, (err?: unknown) => {
 			expect(err).toBeUndefined();
 			done();
 		});
@@ -99,7 +99,7 @@ describe('[UNIT - CORE] ErrorMiddleware', () => {
 			},
 		}) as IResponse;
 
-		ErrorMiddleware.handleError(new ValidationError('body', validation), req, res, (err: Error) => {
+		ErrorMiddleware.handleError(new ValidationError('body', validation), req, res, (err?: unknown) => {
 			expect(err).toBeUndefined();
 			done();
 		});
@@ -123,7 +123,7 @@ describe('[UNIT - CORE] ErrorMiddleware', () => {
 			},
 		}) as IResponse;
 
-		ErrorMiddleware.handleError(new ValidationError('headers', validation), req, res, (err: Error) => {
+		ErrorMiddleware.handleError(new ValidationError('headers', validation), req, res, (err?: unknown) => {
 			expect(err).toBeUndefined();
 			done();
 		});
@@ -147,7 +147,7 @@ describe('[UNIT - CORE] ErrorMiddleware', () => {
 			},
 		}) as IResponse;
 
-		ErrorMiddleware.handleError(new ValidationError('params', validation), req, res, (err: Error) => {
+		ErrorMiddleware.handleError(new ValidationError('params', validation), req, res, (err?: unknown) => {
 			expect(err).toBeUndefined();
 			done();
 		});
@@ -171,7 +171,7 @@ describe('[UNIT - CORE] ErrorMiddleware', () => {
 			},
 		}) as IResponse;
 
-		ErrorMiddleware.handleError(new ValidationError('query', validation), req, res, (err: Error) => {
+		ErrorMiddleware.handleError(new ValidationError('query', validation), req, res, (err?: unknown) => {
 			expect(err).toBeUndefined();
 			done();
 		});
