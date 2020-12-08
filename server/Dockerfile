@@ -1,5 +1,5 @@
 ### BASE ###
-FROM node:erbium-alpine as base
+FROM node:fermium-alpine as base
 
 # Expose port & allow Node.js to use priviliged ports
 EXPOSE 80
